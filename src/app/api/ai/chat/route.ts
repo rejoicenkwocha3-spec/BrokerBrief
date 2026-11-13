@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import OpenAI from 'openai';
 
 export async function POST(request: NextRequest) {
   try {
@@ -103,29 +103,33 @@ Today's date: ${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 
       await supabase.from('ai_messages').insert({ conversation_id: convId, role: 'user', content: userQuery });
     }
 
-    // Call Gemini
-    const apiKey = process.env.GEMINI_API_KEY;
+    // Call OpenAI
+    const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
       return NextResponse.json({
-        message: "AI Associate is not configured. Please add your GEMINI_API_KEY environment variable to enable AI features.",
+        message: "AI Associate is not configured. Please add your OPENAI_API_KEY environment variable to enable AI features.",
         conversationId: convId,
       });
     }
 
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({
-      model: process.env.GEMINI_MODEL ?? 'gemini-2.0-flash-exp',
-      systemInstruction: systemPrompt,
+    const openai = new OpenAI({ apiKey });
+
+    const chatMessages: OpenAI.Chat.ChatCompletionMessageParam[] = [
+      { role: 'system', content: systemPrompt },
+      ...messages.slice(0, -1).map((m) => ({
+        role: m.role as 'user' | 'assistant',
+        content: m.content,
+      })),
+      { role: 'user', content: userQuery },
+    ];
+
+    const completion = await openai.chat.completions.create({
+      model: process.env.OPENAI_MODEL ?? 'gpt-4o-mini',
+      messages: chatMessages,
+      max_tokens: 1500,
     });
 
-    const chatHistory = messages.slice(0, -1).map((m) => ({
-      role: m.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: m.content }],
-    }));
-
-    const chat = model.startChat({ history: chatHistory });
-    const result = await chat.sendMessage(userQuery);
-    const responseText = result.response.text();
+    const responseText = completion.choices[0]?.message?.content ?? 'No response generated.';
 
     if (convId) {
       await supabase.from('ai_messages').insert({ conversation_id: convId, role: 'assistant', content: responseText });
