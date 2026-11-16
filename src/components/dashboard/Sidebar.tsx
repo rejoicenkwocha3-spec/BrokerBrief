@@ -45,7 +45,7 @@ export function Sidebar({ orgName, userFirstName, userLastName }: SidebarProps) 
       {/* Logo */}
       <div className="px-5 py-5 border-b border-gray-100">
         <div className="flex items-center gap-2.5">
-          <img src="/logo.jpg" alt="BrokerBrief" className="h-8 w-8 rounded-md object-cover" />
+          <img src="/logo.svg" alt="BrokerBrief" className="h-8 w-8 rounded-md object-cover" />
           <span className="font-playfair font-semibold text-charcoal text-lg">BrokerBrief</span>
         </div>
       </div>
