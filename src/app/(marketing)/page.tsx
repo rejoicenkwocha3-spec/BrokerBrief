@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, Users, Calendar, Kanban, FileText, BarChart2, Brain, Shield, CheckCircle2, Sparkles, Zap, Globe } from 'lucide-react';
+import { ArrowRight, Users, Calendar, Kanban, FileText, BarChart2, Brain, Shield, CheckCircle2, Sparkles, Zap, Globe, AlertCircle, TrendingUp, Database, Clock } from 'lucide-react';
 
 export default function HomePage() {
   return (
@@ -18,7 +18,7 @@ export default function HomePage() {
             powered by AI.
           </h1>
           <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed">
-            BrokerBrief is the complete AI operating system for modern brokerages — CRM, pipeline, meetings, documents, and intelligent insights in one unified platform.
+            BrokerBrief is the complete AI operating system for modern brokerages: CRM, pipeline, meetings, documents, and intelligent insights in one unified platform.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/signup" className="inline-flex items-center gap-2 bg-emerald-brand hover:bg-[#068a58] text-white font-semibold px-7 py-3.5 rounded-xl text-base transition-colors">
@@ -64,12 +64,14 @@ export default function HomePage() {
           </div>
           <div className="grid md:grid-cols-3 gap-6 mb-14">
             {[
-              { icon: '📊', title: 'No single source of truth', desc: 'Client data lives in 5 different places. No one has the full picture.' },
-              { icon: '⏰', title: 'Deals slip through the cracks', desc: 'Without structured pipeline management, opportunities are lost to follow-up failure.' },
-              { icon: '🧠', title: 'Insights are manual', desc: "Your team spends hours building reports instead of building relationships." },
-            ].map(({ icon, title, desc }) => (
+              { icon: Database, title: 'No single source of truth', desc: 'Client data lives in 5 different places. No one has the full picture.' },
+              { icon: Clock, title: 'Deals slip through the cracks', desc: 'Without structured pipeline management, opportunities are lost to follow-up failure.' },
+              { icon: TrendingUp, title: 'Insights are manual', desc: "Your team spends hours building reports instead of building relationships." },
+            ].map(({ icon: Icon, title, desc }) => (
               <div key={title} className="bg-red-50 border border-red-100 rounded-xl p-5">
-                <div className="text-2xl mb-3">{icon}</div>
+                <div className="w-9 h-9 rounded-lg bg-red-100 flex items-center justify-center mb-3">
+                  <Icon className="w-4.5 h-4.5 text-red-500" />
+                </div>
                 <h3 className="font-semibold text-charcoal mb-2">{title}</h3>
                 <p className="text-sm text-gray-500">{desc}</p>
               </div>
@@ -83,12 +85,14 @@ export default function HomePage() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { icon: '✅', title: 'Unified client intelligence', desc: 'Every client, deal, meeting, and document in one structured workspace.' },
-              { icon: '🚀', title: 'AI-powered pipeline', desc: 'Smart deal tracking with automated follow-ups and next-step recommendations.' },
-              { icon: '💡', title: 'Instant insights', desc: 'Ask your AI Associate anything about your business. Get answers in seconds.' },
-            ].map(({ icon, title, desc }) => (
+              { icon: Users, title: 'Unified client intelligence', desc: 'Every client, deal, meeting, and document in one structured workspace.' },
+              { icon: Kanban, title: 'AI-powered pipeline', desc: 'Smart deal tracking with automated follow-ups and next-step recommendations.' },
+              { icon: BarChart2, title: 'Instant insights', desc: 'Ask your AI Associate anything about your business. Get answers in seconds.' },
+            ].map(({ icon: Icon, title, desc }) => (
               <div key={title} className="bg-mint border border-green-100 rounded-xl p-5">
-                <div className="text-2xl mb-3">{icon}</div>
+                <div className="w-9 h-9 rounded-lg bg-white/60 flex items-center justify-center mb-3">
+                  <Icon className="w-4.5 h-4.5 text-forest" />
+                </div>
                 <h3 className="font-semibold text-charcoal mb-2">{title}</h3>
                 <p className="text-sm text-gray-500">{desc}</p>
               </div>
@@ -147,9 +151,9 @@ export default function HomePage() {
             {[
               {
                 icon: Users,
-                title: 'CRM & Client Management',
+                title: 'CRM and Client Management',
                 desc: 'Complete client profiles with activity history, notes, documents, and linked deals. Never lose context on a relationship.',
-                features: ['360° client profiles', 'Activity timeline', 'Custom segments & tags', 'Automated follow-up reminders'],
+                features: ['360° client profiles', 'Activity timeline', 'Custom segments and tags', 'Automated follow-up reminders'],
               },
               {
                 icon: Kanban,
@@ -161,7 +165,7 @@ export default function HomePage() {
                 icon: Calendar,
                 title: 'Meeting Intelligence',
                 desc: 'Log meetings with notes and transcripts. AI automatically generates summaries and extracts action items.',
-                features: ['Meeting notes & transcripts', 'AI-generated summaries', 'Action item extraction', 'Calendar integration ready'],
+                features: ['Meeting notes and transcripts', 'AI-generated summaries', 'Action item extraction', 'Calendar integration ready'],
               },
               {
                 icon: FileText,
@@ -254,7 +258,7 @@ export default function HomePage() {
       <section className="py-20 bg-forest text-white">
         <div className="max-w-5xl mx-auto px-5">
           <div className="text-center mb-12">
-            <p className="text-xs font-semibold text-emerald-brand uppercase tracking-widest mb-3">Security & Compliance</p>
+            <p className="text-xs font-semibold text-emerald-brand uppercase tracking-widest mb-3">Security and Compliance</p>
             <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4">Built for brokerages that handle sensitive data.</h2>
             <p className="text-white/60 max-w-xl mx-auto">Enterprise-grade security with multi-tenant data isolation, role-based access control, and signed document access — by design, not as an afterthought.</p>
           </div>
