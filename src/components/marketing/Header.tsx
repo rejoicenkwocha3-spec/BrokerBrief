@@ -3,6 +3,13 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
+const navItems = [
+  { label: 'Platform', href: '/platform' },
+  { label: 'Solutions', href: '/solutions' },
+  { label: 'Features', href: '/features' },
+  { label: 'Pricing', href: '/pricing' },
+];
+
 export function Header() {
   const [open, setOpen] = useState(false);
   return (
@@ -14,13 +21,13 @@ export function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">
-          {['Platform', 'Solutions', 'Features', 'Pricing'].map((item) => (
+          {navItems.map(({ label, href }) => (
             <Link
-              key={item}
-              href={item === 'Pricing' ? '/pricing' : '#'}
+              key={label}
+              href={href}
               className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
             >
-              {item}
+              {label}
             </Link>
           ))}
         </nav>
@@ -41,9 +48,9 @@ export function Header() {
 
       {open && (
         <div className="md:hidden border-t border-white/10 bg-forest px-5 py-4 space-y-1">
-          {['Platform', 'Solutions', 'Features', 'Pricing'].map((item) => (
-            <Link key={item} href={item === 'Pricing' ? '/pricing' : '#'} className="block px-3 py-2.5 text-sm text-white/80 hover:text-white rounded-lg" onClick={() => setOpen(false)}>
-              {item}
+          {navItems.map(({ label, href }) => (
+            <Link key={label} href={href} className="block px-3 py-2.5 text-sm text-white/80 hover:text-white rounded-lg" onClick={() => setOpen(false)}>
+              {label}
             </Link>
           ))}
           <div className="pt-3 border-t border-white/10 flex gap-3">
