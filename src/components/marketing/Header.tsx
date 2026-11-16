@@ -9,9 +9,7 @@ export function Header() {
     <header className="sticky top-0 z-50 bg-forest text-white">
       <div className="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-md bg-emerald-brand flex items-center justify-center">
-            <span className="text-white font-bold text-sm">B</span>
-          </div>
+          <img src="/logo.jpg" alt="BrokerBrief" className="h-8 w-8 rounded-md object-cover" />
           <span className="font-playfair font-semibold text-lg">BrokerBrief</span>
         </Link>
 
