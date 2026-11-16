@@ -7,7 +7,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <img src="/logo.jpg" alt="BrokerBrief" className="h-7 w-7 rounded-md object-cover" />
+              <img src="/logo.svg" alt="BrokerBrief" className="h-7 w-7 rounded-md object-cover" />
               <span className="font-playfair font-semibold text-lg">BrokerBrief</span>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed">
