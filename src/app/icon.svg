@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <linearGradient id="topG" x1="20%" y1="0%" x2="100%" y2="60%">
+      <stop offset="0%" stop-color="#8CF5CF"/>
+      <stop offset="100%" stop-color="#3DD49A"/>
+    </linearGradient>
+    <linearGradient id="midG" x1="0%" y1="0%" x2="40%" y2="100%">
+      <stop offset="0%" stop-color="#28BC7A"/>
+      <stop offset="100%" stop-color="#189658"/>
+    </linearGradient>
+    <linearGradient id="botG" x1="0%" y1="0%" x2="30%" y2="100%">
+      <stop offset="0%" stop-color="#189658"/>
+      <stop offset="100%" stop-color="#0C7040"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="500" rx="64" fill="#062C1C"/>
+  <polygon points="250,105 392,183 250,261 108,183" fill="url(#topG)"/>
+  <path d="M108,183 L108,292 Q108,326 144,338 L250,296 L392,218 L392,183 L250,261 Z" fill="url(#midG)"/>
+  <path d="M108,292 Q106,390 184,406 Q228,416 272,404 Q358,382 390,314 Q404,272 376,250 L392,218 L250,296 Q108,348 108,292 Z" fill="url(#botG)"/>
+</svg>
