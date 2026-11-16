@@ -23,21 +23,31 @@ export default function SignUpPage() {
     if (password.length < 8) { setError('Password must be at least 8 characters'); return; }
     setLoading(true);
     setError('');
-    const supabase = createClient();
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=/onboarding` },
-    });
-    if (error) {
-      setError(error.message);
+
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      setError('Authentication is not configured. Please contact support.');
       setLoading(false);
-    } else if (data.session) {
-      // Auto-confirm enabled — session is live immediately
-      router.push('/onboarding');
-    } else {
-      // Email confirmation required
-      setCheckEmail(true);
+      return;
+    }
+
+    try {
+      const supabase = createClient();
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=/onboarding` },
+      });
+      if (error) {
+        setError(error.message);
+      } else if (data.session) {
+        router.refresh();
+        router.push('/onboarding');
+      } else {
+        setCheckEmail(true);
+      }
+    } catch {
+      setError('Something went wrong. Please try again.');
+    } finally {
       setLoading(false);
     }
   };
