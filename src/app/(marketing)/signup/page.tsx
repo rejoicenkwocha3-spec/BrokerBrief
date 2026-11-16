@@ -41,9 +41,7 @@ export default function SignUpPage() {
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
           <div className="flex justify-center mb-6">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-forest flex items-center justify-center">
-                <span className="text-white font-bold">B</span>
-              </div>
+              <img src="/logo.jpg" alt="BrokerBrief" className="h-10 w-10 rounded-xl object-cover" />
               <span className="font-playfair font-semibold text-xl text-charcoal">BrokerBrief</span>
             </div>
           </div>
