@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase/browser';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
+import { Mail } from 'lucide-react';
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -14,6 +15,7 @@ export default function SignUpPage() {
   const [confirm, setConfirm] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [checkEmail, setCheckEmail] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,7 +24,7 @@ export default function SignUpPage() {
     setLoading(true);
     setError('');
     const supabase = createClient();
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=/onboarding` },
@@ -30,10 +32,44 @@ export default function SignUpPage() {
     if (error) {
       setError(error.message);
       setLoading(false);
-    } else {
+    } else if (data.session) {
+      // Auto-confirm enabled — session is live immediately
       router.push('/onboarding');
+    } else {
+      // Email confirmation required
+      setCheckEmail(true);
+      setLoading(false);
     }
   };
+
+  if (checkEmail) {
+    return (
+      <div className="min-h-[calc(100vh-64px)] flex items-center justify-center py-12 px-5">
+        <div className="w-full max-w-md">
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 text-center">
+            <div className="w-14 h-14 rounded-full bg-mint flex items-center justify-center mx-auto mb-5">
+              <Mail className="w-7 h-7 text-forest" />
+            </div>
+            <h1 className="text-2xl font-bold text-charcoal mb-2">Check your email</h1>
+            <p className="text-sm text-gray-500 mb-2">
+              We sent a confirmation link to
+            </p>
+            <p className="text-sm font-semibold text-charcoal mb-6">{email}</p>
+            <p className="text-sm text-gray-400 mb-7">
+              Click the link in the email to confirm your account and get started. It may take a minute to arrive.
+            </p>
+            <Button variant="ghost" className="w-full justify-center" onClick={() => setCheckEmail(false)}>
+              Use a different email
+            </Button>
+            <p className="text-xs text-gray-400 mt-4">
+              Already confirmed?{' '}
+              <Link href="/signin" className="text-emerald-brand hover:underline">Sign in</Link>
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-[calc(100vh-64px)] flex items-center justify-center py-12 px-5">
