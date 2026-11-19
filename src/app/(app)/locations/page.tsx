@@ -44,7 +44,7 @@ export default function LocationsPage() {
       supabase.from('locations').select('id, name, address, city, is_primary, business_profiles(name)').eq('user_id', user.id).order('created_at', { ascending: false }),
       supabase.from('business_profiles').select('id, name').eq('user_id', user.id),
     ]);
-    setLocations(locs || []);
+    setLocations((locs || []) as never);
     setBusinesses(biz || []);
     setLoading(false);
   };

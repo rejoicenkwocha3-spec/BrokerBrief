@@ -40,7 +40,7 @@ export default async function AnalyticsPage() {
             </Link>
           </div>
         ) : (
-          <AnalyticsCharts snapshots={snapshots || []} businesses={businesses} />
+          <AnalyticsCharts snapshots={(snapshots || []) as never} businesses={businesses} />
         )}
       </div>
     </div>

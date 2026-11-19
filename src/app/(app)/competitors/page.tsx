@@ -43,7 +43,7 @@ export default function CompetitorsPage() {
       supabase.from('tracked_competitors').select('id, name, address, category, visibility_score, notes, business_profiles(name)').eq('user_id', user.id).order('created_at', { ascending: false }),
       supabase.from('business_profiles').select('id, name').eq('user_id', user.id),
     ]);
-    setCompetitors(comps || []);
+    setCompetitors((comps || []) as never);
     setBusinesses(biz || []);
     setLoading(false);
   };
