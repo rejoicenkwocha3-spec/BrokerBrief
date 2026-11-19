@@ -1,213 +1,219 @@
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2, Users, Kanban, Calendar, FileText, BarChart2, Sparkles, Shield, CheckSquare, UserCheck, Settings2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, MapPin, Search, Target, Star, BarChart2, Zap, Eye, FileText, Users } from 'lucide-react';
+
+export const metadata = {
+  title: 'Features | Locallyndex',
+  description: 'All Locallyndex features: local visibility, business profiles, competitor monitoring, review intelligence, analytics, and AI recommendations.',
+};
 
 const categories = [
   {
-    icon: Users,
-    name: 'CRM and Client Management',
+    icon: MapPin,
+    title: 'Business Profile Management',
+    description:
+      'Store and manage all business profile data in a structured, scored format. Locallyndex highlights missing information and calculates a profile completeness score based on factors that influence local search ranking.',
     features: [
-      '360° client profiles with full history',
-      'Company and contact linking',
-      'Activity timeline across all touchpoints',
-      'Custom fields per client type',
-      'Segment and tag clients for targeted outreach',
-      'Automated follow-up reminders and task creation',
-      'Direct link from client to their open deals',
-      'Document and meeting history per client',
+      { name: 'Business profile storage', implemented: true },
+      { name: 'Profile completeness scoring', implemented: true },
+      { name: 'Category and attribute tracking', implemented: true },
+      { name: 'Business hours and service area', implemented: true },
+      { name: 'Multi-location account support', implemented: true },
+      { name: 'Profile change history', implemented: true },
     ],
   },
   {
-    icon: Kanban,
-    name: 'Deal Pipeline',
+    icon: Search,
+    title: 'Local Search Intelligence',
+    description:
+      'Track where your business appears in local search results for the keywords that matter to your category and location. Understand trends over time and identify the keywords driving visibility for your competitors.',
     features: [
-      'Visual Kanban board with drag-and-drop stages',
-      '7 customisable deal stages',
-      'Deal value, probability, and expected close date',
-      'Stale deal detection and alerts',
-      'Win/loss outcome tracking with notes',
-      'Pipeline velocity and conversion metrics',
-      'Revenue forecasting from pipeline data',
-      'Team-wide pipeline visibility',
+      { name: 'Visibility score with weekly tracking', implemented: true },
+      { name: 'Local search rank monitoring', implemented: true },
+      { name: 'Keyword visibility data', implemented: true },
+      { name: 'Local pack appearance tracking', implemented: true },
+      { name: 'Search volume estimates', implemented: true },
+      { name: 'Historical rank comparison', implemented: true },
     ],
   },
   {
-    icon: Calendar,
-    name: 'Meeting Intelligence',
+    icon: Target,
+    title: 'Competitor Monitoring',
+    description:
+      'Add your direct local competitors and Locallyndex tracks their visibility scores, review ratings, and profile changes so you always know where you stand relative to them.',
     features: [
-      'Log meetings with structured notes',
-      'Full transcript upload and storage',
-      'AI-generated meeting summaries',
-      'Automatic action item extraction',
-      'Meeting history linked to each client and deal',
-      'Attendee tracking and meeting type classification',
-      'Follow-up task creation from meeting outcomes',
-      'Calendar integration ready',
+      { name: 'Competitor visibility score tracking', implemented: true },
+      { name: 'Review volume and rating comparison', implemented: true },
+      { name: 'Profile completeness benchmarking', implemented: true },
+      { name: 'Side-by-side competitor overview', implemented: true },
+      { name: 'Competitive gap identification', implemented: true },
+      { name: 'Competitor profile change alerts', implemented: false },
     ],
   },
   {
-    icon: FileText,
-    name: 'Document Management',
+    icon: Star,
+    title: 'Review and Reputation Insights',
+    description:
+      'Monitor your review data across platforms in one consolidated view. Understand your overall reputation, track response rates, and identify patterns in customer feedback.',
     features: [
-      'Per-client document organisation',
-      'Category tags: contracts, compliance, statements, other',
-      'Secure cloud storage with signed URL access',
-      'AI document summarisation',
-      'Version history and upload timestamps',
-      'Team-wide document visibility by role',
-      'Compliance-ready audit trail',
-      'Bulk upload support',
-    ],
-  },
-  {
-    icon: Sparkles,
-    name: 'AI Associate',
-    features: [
-      'Natural language queries across all business data',
-      'Client and relationship summaries on demand',
-      'Pipeline health analysis and opportunity scoring',
-      'Draft follow-up emails from meeting context',
-      'Which deals need attention this week',
-      'Team performance questions answered instantly',
-      'Document-aware responses',
-      'Available 24/7, responds in seconds',
+      { name: 'Aggregated review summary', implemented: true },
+      { name: 'Average rating tracking over time', implemented: true },
+      { name: 'Review volume by platform', implemented: true },
+      { name: 'Sentiment breakdown', implemented: true },
+      { name: 'Response rate monitoring', implemented: true },
+      { name: 'Review keyword analysis', implemented: false },
     ],
   },
   {
     icon: BarChart2,
-    name: 'Business Intelligence',
+    title: 'Local Market Analytics',
+    description:
+      'Visualise your visibility performance, review trends, and competitive position over time. All charts and metrics in Locallyndex are built from real data connected to your account.',
     features: [
-      'Revenue dashboards from live pipeline data',
-      'Conversion rate by stage and time period',
-      'Pipeline velocity and average deal cycle',
-      'Client retention and churn tracking',
-      'Team activity and performance metrics',
-      'Task completion rates by team member',
-      'Meeting and engagement frequency reports',
-      'Custom date range filters',
+      { name: 'Visibility score history chart', implemented: true },
+      { name: 'Monthly impression estimates', implemented: true },
+      { name: 'Review volume trend chart', implemented: true },
+      { name: 'Competitor comparison chart', implemented: true },
+      { name: 'Platform-level breakdown', implemented: true },
+      { name: 'Custom date range filtering', implemented: true },
     ],
   },
   {
-    icon: CheckSquare,
-    name: 'Tasks and Automation',
+    icon: Zap,
+    title: 'AI-Powered Recommendations',
+    description:
+      'Locallyndex analyses your profile, your competitive position, and your review data to generate a prioritised list of specific, actionable steps. Each recommendation includes an effort estimate and an expected impact.',
     features: [
-      'Task creation from meetings, deals, or manually',
-      'Due date and priority assignment',
-      'Team member task delegation',
-      'Overdue task alerts',
-      'Automatic activity logging on client interactions',
-      'Pipeline stage update history',
-      'Smart reminders for stale deals',
-      'Email notification triggers',
+      { name: 'Prioritised action list', implemented: true },
+      { name: 'Effort and impact scoring', implemented: true },
+      { name: 'Category-specific guidance', implemented: true },
+      { name: 'Weekly recommendation refresh', implemented: true },
+      { name: 'Mark recommendations as complete', implemented: true },
+      { name: 'AI explanation for each action', implemented: true },
     ],
   },
   {
-    icon: UserCheck,
-    name: 'Team and Collaboration',
+    icon: Eye,
+    title: 'Local Visibility Dashboard',
+    description:
+      'Your overview dashboard surfaces the most important information about your local presence at a glance, so you know what to act on without digging through reports.',
     features: [
-      '6 permission roles: Owner, Admin, Manager, Broker, Staff, Read-only',
-      'Email invitation system for team members',
-      'Shared pipeline and client views',
-      'Organisation-level data isolation',
-      'Per-member activity tracking',
-      'Handover notes and client reassignment',
-      'Multi-organisation support',
-      'Audit-ready access control logs',
+      { name: 'At-a-glance visibility score', implemented: true },
+      { name: 'Recent changes summary', implemented: true },
+      { name: 'Top recommendations highlight', implemented: true },
+      { name: 'Competitor standing overview', implemented: true },
+      { name: 'Review status summary', implemented: true },
+      { name: 'Performance vs last period', implemented: true },
     ],
   },
   {
-    icon: Shield,
-    name: 'Security and Compliance',
+    icon: FileText,
+    title: 'Performance Reporting',
+    description:
+      'Generate structured performance reports for your business or clients. Reports are built from live data and include visibility score, local rank, review summary, and competitive standing.',
     features: [
-      'Row-level security on every query',
-      'Multi-tenant data isolation by design',
-      'Signed URL document access control',
-      'No cross-tenant data exposure',
-      'Role-based feature and data access',
-      'Secure authentication with email confirmation',
-      'AI data processing without training on your data',
-      'SOC-2 aligned architecture',
+      { name: 'Performance report generation', implemented: true },
+      { name: 'Visibility score over time', implemented: true },
+      { name: 'Competitor comparison inclusion', implemented: true },
+      { name: 'Review data summary', implemented: true },
+      { name: 'Exportable report format', implemented: false },
+      { name: 'Scheduled report delivery', implemented: false },
+    ],
+  },
+  {
+    icon: Users,
+    title: 'Multi-Location Management',
+    description:
+      'Add and manage multiple business locations from a single Locallyndex account. Each location has its own visibility score, recommendations, and competitive data.',
+    features: [
+      { name: 'Multiple location profiles', implemented: true },
+      { name: 'Per-location visibility scores', implemented: true },
+      { name: 'Location performance comparison', implemented: true },
+      { name: 'Location-specific recommendations', implemented: true },
+      { name: 'Shared account access', implemented: true },
+      { name: 'Location grouping for agencies', implemented: false },
     ],
   },
 ];
 
 export default function FeaturesPage() {
   return (
-    <div className="bg-soft-white">
+    <div className="bg-surface">
+
       {/* Hero */}
-      <section className="bg-forest text-white pt-20 pb-24 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #079B65 0%, transparent 50%), radial-gradient(circle at 80% 50%, #8154E8 0%, transparent 50%)' }} />
-        <div className="max-w-4xl mx-auto px-5 text-center relative">
-          <p className="text-xs font-semibold text-emerald-brand uppercase tracking-widest mb-4">Features</p>
-          <h1 className="font-playfair text-4xl md:text-5xl font-bold leading-tight mb-6">
-            Every feature your team needs to close more deals.
+      <section className="bg-white py-20 border-b border-line">
+        <div className="max-w-4xl mx-auto px-5 text-center">
+          <p className="section-label mb-3">Features</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-charcoal mb-5 tracking-tight">
+            Everything you need to understand<br />and improve your local presence.
           </h1>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed">
-            A complete feature set built for brokerages — no missing pieces, no patchwork integrations, no extra fees for core functionality.
+          <p className="text-lg text-dim max-w-2xl mx-auto leading-relaxed">
+            Every Locallyndex feature is built around a clear purpose: helping your business appear more prominently to local customers and act on the intelligence that improves your position.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/signup" className="inline-flex items-center gap-2 bg-emerald-brand hover:bg-[#068a58] text-white font-semibold px-7 py-3.5 rounded-xl text-base transition-colors">
-              Start free trial <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link href="/platform" className="inline-flex items-center gap-2 border border-white/30 hover:bg-white/10 text-white font-medium px-7 py-3.5 rounded-xl text-base transition-colors">
-              See the platform
-            </Link>
+        </div>
+      </section>
+
+      {/* Feature Legend */}
+      <section className="py-8 border-b border-line bg-white">
+        <div className="max-w-5xl mx-auto px-5 flex items-center gap-6 text-sm text-dim">
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-brand" />
+            <span>Available now</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded-full border-2 border-line" />
+            <span>Coming soon</span>
           </div>
         </div>
       </section>
 
-      {/* Feature categories */}
+      {/* Feature Categories */}
       <section className="py-20">
-        <div className="max-w-5xl mx-auto px-5">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.map(({ icon: Icon, name, features }) => (
-              <div key={name} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                <div className="w-10 h-10 rounded-xl bg-mint flex items-center justify-center mb-4">
-                  <Icon className="w-5 h-5 text-forest" />
+        <div className="max-w-5xl mx-auto px-5 space-y-8">
+          {categories.map(({ icon: Icon, title, description, features }) => (
+            <div key={title} className="bg-white border border-line rounded-2xl p-8">
+              <div className="grid md:grid-cols-5 gap-8">
+                <div className="md:col-span-3">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-lg bg-haze flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-brand" />
+                    </div>
+                    <h2 className="font-bold text-charcoal text-lg">{title}</h2>
+                  </div>
+                  <p className="text-dim leading-relaxed text-sm">{description}</p>
                 </div>
-                <h3 className="font-semibold text-charcoal mb-4">{name}</h3>
-                <ul className="space-y-2">
-                  {features.map((f) => (
-                    <li key={f} className="flex items-start gap-2.5 text-sm text-gray-600">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-brand flex-shrink-0 mt-0.5" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
+                <div className="md:col-span-2">
+                  <ul className="space-y-2.5">
+                    {features.map(({ name, implemented }) => (
+                      <li key={name} className="flex items-center gap-3 text-sm">
+                        {implemented ? (
+                          <CheckCircle2 className="w-4 h-4 text-brand flex-shrink-0" />
+                        ) : (
+                          <div className="w-4 h-4 rounded-full border-2 border-line flex-shrink-0" />
+                        )}
+                        <span className={implemented ? 'text-charcoal' : 'text-dim'}>{name}</span>
+                        {!implemented && (
+                          <span className="text-xs bg-line text-dim px-2 py-0.5 rounded-full ml-auto">Soon</span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats bar */}
-      <section className="py-16 bg-forest text-white">
-        <div className="max-w-5xl mx-auto px-5">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { n: '70+', l: 'Features included' },
-              { n: '6', l: 'Permission roles' },
-              { n: '7', l: 'Pipeline stages' },
-              { n: '24/7', l: 'AI Associate access' },
-            ].map(({ n, l }) => (
-              <div key={l}>
-                <p className="text-3xl font-bold text-emerald-brand mb-1">{n}</p>
-                <p className="text-sm text-white/60">{l}</p>
-              </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-soft-white">
-        <div className="max-w-3xl mx-auto px-5 text-center">
-          <h2 className="font-playfair text-4xl font-bold text-charcoal mb-5">The intelligence behind every deal.</h2>
-          <p className="text-lg text-gray-500 mb-10">Start your 14-day free trial. No credit card required.</p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/signup" className="inline-flex items-center gap-2 bg-emerald-brand hover:bg-[#068a58] text-white font-semibold px-8 py-4 rounded-xl text-base transition-colors">
-              Start free trial <ArrowRight className="w-4 h-4" />
+      <section className="py-20 bg-white border-t border-line">
+        <div className="max-w-2xl mx-auto px-5 text-center">
+          <h2 className="text-3xl font-bold text-charcoal mb-4 tracking-tight">Start using all these features today.</h2>
+          <p className="text-dim mb-8">Create your account and have your first visibility report in minutes.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/signup" className="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-semibold px-7 py-3.5 rounded-lg transition-colors">
+              Get Started <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link href="/pricing" className="inline-flex items-center gap-2 border border-gray-200 hover:bg-light-grey text-charcoal font-medium px-8 py-4 rounded-xl text-base transition-colors">
+            <Link href="/pricing" className="inline-flex items-center gap-2 border border-line hover:bg-surface text-charcoal font-medium px-7 py-3.5 rounded-lg transition-colors">
               View pricing
             </Link>
           </div>

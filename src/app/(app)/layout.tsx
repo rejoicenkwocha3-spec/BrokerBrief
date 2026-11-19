@@ -10,7 +10,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('*')
+    .select('first_name, last_name, onboarding_completed')
     .eq('id', user.id)
     .single();
 
@@ -18,25 +18,15 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     redirect('/onboarding');
   }
 
-  const { data: membership } = await supabase
-    .from('organisation_members')
-    .select('organisation_id, organisations(name)')
-    .eq('user_id', user.id)
-    .limit(1)
-    .single();
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const orgRaw = membership?.organisations as any;
-  const orgName: string | undefined = Array.isArray(orgRaw) ? orgRaw[0]?.name : orgRaw?.name;
-
   return (
-    <div className="flex h-screen overflow-hidden bg-soft-white">
+    <div className="flex h-screen overflow-hidden bg-surface">
       <Sidebar
-        orgName={orgName}
+        userEmail={user.email}
         userFirstName={profile?.first_name}
         userLastName={profile?.last_name}
       />
-      <main className="flex-1 overflow-y-auto">
+      {/* Mobile sidebar overlay handled via CSS */}
+      <main className="flex-1 overflow-y-auto min-w-0">
         {children}
       </main>
     </div>

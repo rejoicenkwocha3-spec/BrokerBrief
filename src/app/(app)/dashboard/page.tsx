@@ -1,182 +1,206 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
-import { MetricCard } from '@/components/dashboard/MetricCard';
 import { TopBar } from '@/components/dashboard/TopBar';
-import { Users, TrendingUp, DollarSign, Percent, Clock, Calendar, AlertCircle } from 'lucide-react';
-import { formatCurrency, formatDate, formatDateTime } from '@/lib/utils';
-import { Badge, statusBadge } from '@/components/ui/Badge';
+import { Building2, MapPin, Eye, Star, ArrowRight, Zap, TrendingUp, AlertCircle } from 'lucide-react';
+import Link from 'next/link';
 
 export default async function DashboardPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect('/signin');
 
-  const { data: membership } = await supabase
-    .from('organisation_members')
-    .select('organisation_id')
+  // Fetch business profiles count
+  const { count: businessCount } = await supabase
+    .from('business_profiles')
+    .select('*', { count: 'exact', head: true })
+    .eq('user_id', user.id);
+
+  // Fetch locations count
+  const { count: locationCount } = await supabase
+    .from('locations')
+    .select('*', { count: 'exact', head: true })
+    .eq('user_id', user.id);
+
+  // Fetch recent AI recommendations
+  const { data: recommendations } = await supabase
+    .from('ai_recommendations')
+    .select('id, title, priority, type')
     .eq('user_id', user.id)
+    .eq('status', 'pending')
+    .order('created_at', { ascending: false })
+    .limit(5);
+
+  // Fetch latest visibility snapshot
+  const { data: latestVisibility } = await supabase
+    .from('visibility_snapshots')
+    .select('score, local_rank, recorded_at, business_profiles(name)')
+    .eq('user_id', user.id)
+    .order('recorded_at', { ascending: false })
     .limit(1)
-    .single();
+    .maybeSingle();
 
-  if (!membership) return redirect('/onboarding');
-  const membership2 = membership as { organisation_id: string; role?: string };
-  const orgId = membership2.organisation_id;
+  // Fetch review summary
+  const { data: reviewSummary } = await supabase
+    .from('review_summaries')
+    .select('rating, total_reviews, platform, business_id')
+    .eq('user_id', user.id)
+    .order('synced_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
 
-  const now = new Date();
-  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
-  const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-  const threeDaysFromNow = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString();
-
-  type WonDeal = { value: number | null };
-  type Activity = { id: string; title: string; created_at: string; clients: unknown };
-  type Meeting = { id: string; title: string; scheduled_at: string | null; status: string; clients: unknown };
-  type StalledDeal = { id: string; title: string; stage: string; updated_at: string; clients: unknown };
-  type UrgentTask = { id: string; title: string; priority: string; due_date: string | null; clients: unknown };
-
-  const [
-    { count: clientCount },
-    { count: activeDeals },
-    { data: wonDealsRaw },
-    { count: totalDeals },
-    { data: recentActivityRaw },
-    { data: upcomingMeetingsRaw },
-    { data: stalledDealsRaw },
-    { data: urgentTasksRaw },
-  ] = await Promise.all([
-    supabase.from('clients').select('*', { count: 'exact', head: true }).eq('organisation_id', orgId).neq('status', 'archived'),
-    supabase.from('deals').select('*', { count: 'exact', head: true }).eq('organisation_id', orgId).not('stage', 'in', '("won","lost")'),
-    supabase.from('deals').select('value').eq('organisation_id', orgId).eq('stage', 'won').gte('updated_at', startOfMonth),
-    supabase.from('deals').select('*', { count: 'exact', head: true }).eq('organisation_id', orgId),
-    supabase.from('client_activities').select('id, title, created_at, clients(first_name, last_name)').eq('organisation_id', orgId).order('created_at', { ascending: false }).limit(8),
-    supabase.from('meetings').select('id, title, scheduled_at, status, clients(first_name, last_name)').eq('organisation_id', orgId).eq('status', 'scheduled').gte('scheduled_at', now.toISOString()).order('scheduled_at').limit(5),
-    supabase.from('deals').select('id, title, stage, updated_at, clients(first_name, last_name)').eq('organisation_id', orgId).in('stage', ['proposal_sent', 'negotiation']).lte('updated_at', sevenDaysAgo).limit(5),
-    supabase.from('tasks').select('id, title, priority, due_date, clients(first_name, last_name)').eq('organisation_id', orgId).in('status', ['todo', 'in_progress']).lte('due_date', threeDaysFromNow).order('due_date').limit(5),
-  ]);
-
-  const wonDeals = wonDealsRaw as WonDeal[] | null;
-  const recentActivity = recentActivityRaw as Activity[] | null;
-  const upcomingMeetings = upcomingMeetingsRaw as Meeting[] | null;
-  const stalledDeals = stalledDealsRaw as StalledDeal[] | null;
-  const urgentTasks = urgentTasksRaw as UrgentTask[] | null;
-
-  const monthRevenue = wonDeals?.reduce((s, d) => s + (d.value ?? 0), 0) ?? 0;
-  const conversionRate = totalDeals && totalDeals > 0
-    ? Math.round(((wonDeals?.length ?? 0) / totalDeals) * 100)
-    : 0;
+  const hasData = (businessCount ?? 0) > 0;
 
   return (
     <div>
-      <TopBar title="Overview" subtitle="Your brokerage at a glance" />
+      <TopBar
+        title="Overview"
+        subtitle="Your local visibility at a glance"
+        actions={
+          hasData ? undefined : (
+            <Link href="/business-profiles" className="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
+              Add Business <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          )
+        }
+      />
+
       <div className="p-6 space-y-6">
-        {/* Metrics */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <MetricCard label="Total Clients" value={clientCount ?? 0} icon={Users} />
-          <MetricCard label="Active Deals" value={activeDeals ?? 0} icon={TrendingUp} />
-          <MetricCard label="Revenue This Month" value={formatCurrency(monthRevenue)} icon={DollarSign} />
-          <MetricCard label="Conversion Rate" value={`${conversionRate}%`} icon={Percent} />
-        </div>
 
-        <div className="grid lg:grid-cols-2 gap-6">
-          {/* Recent Activity */}
-          <div className="card p-5">
-            <h2 className="font-semibold text-charcoal mb-4">Recent Activity</h2>
-            {recentActivity && recentActivity.length > 0 ? (
-              <ul className="space-y-3">
-                {recentActivity.map((a) => {
-                  const client = a.clients as { first_name: string; last_name: string } | null;
-                  return (
-                    <li key={a.id} className="flex items-start gap-3 text-sm">
-                      <div className="w-2 h-2 rounded-full bg-emerald-brand mt-1.5 flex-shrink-0" />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-charcoal">{a.title}</p>
-                        {client && <p className="text-gray-400 text-xs">{client.first_name} {client.last_name}</p>}
-                      </div>
-                      <span className="text-gray-400 text-xs flex-shrink-0">{formatDate(a.created_at)}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-            ) : (
-              <p className="text-sm text-gray-400">No recent activity. Start adding clients and logging interactions.</p>
-            )}
+        {/* Empty state */}
+        {!hasData && (
+          <div className="bg-white border border-line rounded-xl p-10 text-center">
+            <div className="w-14 h-14 rounded-full bg-haze flex items-center justify-center mx-auto mb-4">
+              <Building2 className="w-7 h-7 text-brand" />
+            </div>
+            <h2 className="text-lg font-semibold text-charcoal mb-2">Add your first business</h2>
+            <p className="text-sm text-dim max-w-sm mx-auto mb-6">
+              Start by adding your business profile. Locallyndex will calculate your visibility score and generate recommendations.
+            </p>
+            <Link
+              href="/business-profiles"
+              className="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors"
+            >
+              Add Business Profile <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
+        )}
 
-          {/* Upcoming Meetings */}
-          <div className="card p-5">
-            <h2 className="font-semibold text-charcoal mb-4 flex items-center gap-2"><Calendar className="w-4 h-4 text-forest" /> Upcoming Meetings</h2>
-            {upcomingMeetings && upcomingMeetings.length > 0 ? (
-              <ul className="space-y-3">
-                {upcomingMeetings.map((m) => {
-                  const client = m.clients as { first_name: string; last_name: string } | null;
-                  return (
-                    <li key={m.id} className="flex items-start gap-3 text-sm">
-                      <div className="w-9 h-9 rounded-lg bg-mint flex items-center justify-center flex-shrink-0">
-                        <Calendar className="w-4 h-4 text-forest" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-medium text-charcoal truncate">{m.title}</p>
-                        {client && <p className="text-gray-400 text-xs">{client.first_name} {client.last_name}</p>}
-                        {m.scheduled_at && <p className="text-emerald-brand text-xs">{formatDateTime(m.scheduled_at)}</p>}
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            ) : (
-              <p className="text-sm text-gray-400">No upcoming meetings. Schedule one from the Meetings page.</p>
-            )}
+        {/* Metric cards */}
+        {hasData && (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              {
+                label: 'Visibility Score',
+                value: latestVisibility?.score ? `${latestVisibility.score}/100` : 'N/A',
+                icon: Eye,
+                sub: latestVisibility ? 'Last updated recently' : 'No data yet',
+                href: '/visibility',
+              },
+              {
+                label: 'Local Rank',
+                value: latestVisibility?.local_rank ? `#${latestVisibility.local_rank}` : 'N/A',
+                icon: TrendingUp,
+                sub: 'In your category',
+                href: '/visibility',
+              },
+              {
+                label: 'Review Rating',
+                value: reviewSummary?.rating ? reviewSummary.rating.toFixed(1) : 'N/A',
+                icon: Star,
+                sub: reviewSummary ? `${reviewSummary.total_reviews} reviews` : 'No reviews yet',
+                href: '/reviews',
+              },
+              {
+                label: 'Business Profiles',
+                value: `${businessCount ?? 0}`,
+                icon: Building2,
+                sub: `${locationCount ?? 0} locations`,
+                href: '/business-profiles',
+              },
+            ].map(({ label, value, icon: Icon, sub, href }) => (
+              <Link
+                key={label}
+                href={href}
+                className="bg-white border border-line rounded-xl p-5 hover:border-brand/30 transition-colors group"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <p className="text-xs font-medium text-dim">{label}</p>
+                  <div className="w-7 h-7 rounded-lg bg-haze flex items-center justify-center">
+                    <Icon className="w-3.5 h-3.5 text-brand" />
+                  </div>
+                </div>
+                <p className="text-2xl font-bold text-charcoal mb-1">{value}</p>
+                <p className="text-xs text-dim">{sub}</p>
+              </Link>
+            ))}
           </div>
+        )}
 
-          {/* Stalled Deals */}
-          <div className="card p-5">
-            <h2 className="font-semibold text-charcoal mb-4 flex items-center gap-2"><AlertCircle className="w-4 h-4 text-yellow-500" /> Deals Needing Attention</h2>
-            {stalledDeals && stalledDeals.length > 0 ? (
-              <ul className="space-y-3">
-                {stalledDeals.map((d) => {
-                  const client = d.clients as { first_name: string; last_name: string } | null;
-                  return (
-                    <li key={d.id} className="flex items-start gap-3 text-sm">
-                      <div className="flex-1 min-w-0">
-                        <p className="font-medium text-charcoal truncate">{d.title}</p>
-                        {client && <p className="text-gray-400 text-xs">{client.first_name} {client.last_name}</p>}
-                      </div>
-                      <Badge variant={statusBadge(d.stage)}>{d.stage.replace('_', ' ')}</Badge>
-                    </li>
-                  );
-                })}
-              </ul>
-            ) : (
-              <p className="text-sm text-gray-400">No stalled deals. Pipeline is moving well.</p>
-            )}
-          </div>
+        {/* Two-column section */}
+        {hasData && (
+          <div className="grid lg:grid-cols-2 gap-6">
 
-          {/* Urgent Tasks */}
-          <div className="card p-5">
-            <h2 className="font-semibold text-charcoal mb-4 flex items-center gap-2"><Clock className="w-4 h-4 text-red-500" /> Urgent Tasks</h2>
-            {urgentTasks && urgentTasks.length > 0 ? (
-              <ul className="space-y-3">
-                {urgentTasks.map((t) => {
-                  const overdue = t.due_date && new Date(t.due_date) < now;
-                  return (
-                    <li key={t.id} className="flex items-start gap-3 text-sm">
-                      <div className="flex-1 min-w-0">
-                        <p className="font-medium text-charcoal truncate">{t.title}</p>
-                        {t.due_date && (
-                          <p className={`text-xs ${overdue ? 'text-red-500' : 'text-gray-400'}`}>
-                            Due {formatDate(t.due_date)}{overdue ? ' — OVERDUE' : ''}
-                          </p>
-                        )}
-                      </div>
-                      <Badge variant={overdue ? 'danger' : 'warning'}>{t.priority}</Badge>
+            {/* AI Recommendations */}
+            <div className="bg-white border border-line rounded-xl p-5">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="font-semibold text-charcoal flex items-center gap-2">
+                  <Zap className="w-4 h-4 text-brand" />
+                  Top Recommendations
+                </h2>
+                <Link href="/ai-recommendations" className="text-xs text-brand hover:underline">
+                  View all
+                </Link>
+              </div>
+              {recommendations && recommendations.length > 0 ? (
+                <ul className="space-y-3">
+                  {recommendations.map((r) => (
+                    <li key={r.id} className="flex items-start gap-3">
+                      <span className={`text-xs font-semibold px-2 py-0.5 rounded-full flex-shrink-0 mt-0.5 ${
+                        r.priority === 'high' ? 'bg-brand text-white' : 'bg-haze text-brand'
+                      }`}>
+                        {r.priority}
+                      </span>
+                      <p className="text-sm text-charcoal">{r.title}</p>
                     </li>
-                  );
-                })}
-              </ul>
-            ) : (
-              <p className="text-sm text-gray-400">No urgent tasks. You&apos;re on top of things!</p>
-            )}
+                  ))}
+                </ul>
+              ) : (
+                <div className="text-center py-6">
+                  <Zap className="w-8 h-8 text-line mx-auto mb-2" />
+                  <p className="text-sm text-dim">Recommendations will appear once your profile is set up.</p>
+                </div>
+              )}
+            </div>
+
+            {/* Quick actions */}
+            <div className="bg-white border border-line rounded-xl p-5">
+              <h2 className="font-semibold text-charcoal mb-4">Quick Actions</h2>
+              <div className="space-y-2">
+                {[
+                  { href: '/business-profiles', icon: Building2, label: 'Manage business profiles', desc: 'Add or update your business information' },
+                  { href: '/locations', icon: MapPin, label: 'Add a location', desc: 'Track multiple locations from one account' },
+                  { href: '/competitors', icon: AlertCircle, label: 'Monitor competitors', desc: 'Track nearby businesses in your category' },
+                  { href: '/reviews', icon: Star, label: 'View review summary', desc: 'See your reputation across platforms' },
+                ].map(({ href, icon: Icon, label, desc }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-surface transition-colors group"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-haze flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-4 h-4 text-brand" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-charcoal">{label}</p>
+                      <p className="text-xs text-dim truncate">{desc}</p>
+                    </div>
+                    <ArrowRight className="w-3.5 h-3.5 text-line group-hover:text-brand transition-colors" />
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
