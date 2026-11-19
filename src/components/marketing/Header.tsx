@@ -17,8 +17,8 @@ export function Header() {
     <header className="sticky top-0 z-50 bg-white border-b border-line">
       <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5">
-          <img src="/logo.svg" alt="Locallyndex" className="h-7 w-auto" />
-          <span className="font-semibold text-charcoal text-lg tracking-tight">Locallyndex</span>
+          <img src="/logo.svg" alt="Locallndex" className="h-7 w-auto" />
+          <span className="font-semibold text-charcoal text-lg tracking-tight">Locallndex</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">

@@ -47,12 +47,12 @@ export default function SignInPage() {
         <div className="bg-white rounded-2xl border border-line p-10">
           <div className="flex justify-center mb-7">
             <div className="flex items-center gap-2.5">
-              <img src="/logo.svg" alt="Locallyndex" className="h-8 w-auto" />
-              <span className="font-bold text-charcoal text-xl">Locallyndex</span>
+              <img src="/logo.svg" alt="Locallndex" className="h-8 w-auto" />
+              <span className="font-bold text-charcoal text-xl">Locallndex</span>
             </div>
           </div>
           <h1 className="text-2xl font-bold text-charcoal mb-1 text-center">Welcome back</h1>
-          <p className="text-sm text-dim text-center mb-7">Log in to your Locallyndex account</p>
+          <p className="text-sm text-dim text-center mb-7">Log in to your Locallndex account</p>
 
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-600 text-sm rounded-lg px-4 py-3 mb-5">

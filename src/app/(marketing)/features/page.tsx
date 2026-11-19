@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { ArrowRight, CheckCircle2, MapPin, Search, Target, Star, BarChart2, Zap, Eye, FileText, Users } from 'lucide-react';
 
 export const metadata = {
-  title: 'Features | Locallyndex',
-  description: 'All Locallyndex features: local visibility, business profiles, competitor monitoring, review intelligence, analytics, and AI recommendations.',
+  title: 'Features | Locallndex',
+  description: 'All Locallndex features: local visibility, business profiles, competitor monitoring, review intelligence, analytics, and AI recommendations.',
 };
 
 const categories = [
@@ -11,7 +11,7 @@ const categories = [
     icon: MapPin,
     title: 'Business Profile Management',
     description:
-      'Store and manage all business profile data in a structured, scored format. Locallyndex highlights missing information and calculates a profile completeness score based on factors that influence local search ranking.',
+      'Store and manage all business profile data in a structured, scored format. Locallndex highlights missing information and calculates a profile completeness score based on factors that influence local search ranking.',
     features: [
       { name: 'Business profile storage', implemented: true },
       { name: 'Profile completeness scoring', implemented: true },
@@ -39,7 +39,7 @@ const categories = [
     icon: Target,
     title: 'Competitor Monitoring',
     description:
-      'Add your direct local competitors and Locallyndex tracks their visibility scores, review ratings, and profile changes so you always know where you stand relative to them.',
+      'Add your direct local competitors and Locallndex tracks their visibility scores, review ratings, and profile changes so you always know where you stand relative to them.',
     features: [
       { name: 'Competitor visibility score tracking', implemented: true },
       { name: 'Review volume and rating comparison', implemented: true },
@@ -67,7 +67,7 @@ const categories = [
     icon: BarChart2,
     title: 'Local Market Analytics',
     description:
-      'Visualise your visibility performance, review trends, and competitive position over time. All charts and metrics in Locallyndex are built from real data connected to your account.',
+      'Visualise your visibility performance, review trends, and competitive position over time. All charts and metrics in Locallndex are built from real data connected to your account.',
     features: [
       { name: 'Visibility score history chart', implemented: true },
       { name: 'Monthly impression estimates', implemented: true },
@@ -81,7 +81,7 @@ const categories = [
     icon: Zap,
     title: 'AI-Powered Recommendations',
     description:
-      'Locallyndex analyses your profile, your competitive position, and your review data to generate a prioritised list of specific, actionable steps. Each recommendation includes an effort estimate and an expected impact.',
+      'Locallndex analyses your profile, your competitive position, and your review data to generate a prioritised list of specific, actionable steps. Each recommendation includes an effort estimate and an expected impact.',
     features: [
       { name: 'Prioritised action list', implemented: true },
       { name: 'Effort and impact scoring', implemented: true },
@@ -123,7 +123,7 @@ const categories = [
     icon: Users,
     title: 'Multi-Location Management',
     description:
-      'Add and manage multiple business locations from a single Locallyndex account. Each location has its own visibility score, recommendations, and competitive data.',
+      'Add and manage multiple business locations from a single Locallndex account. Each location has its own visibility score, recommendations, and competitive data.',
     features: [
       { name: 'Multiple location profiles', implemented: true },
       { name: 'Per-location visibility scores', implemented: true },
@@ -147,7 +147,7 @@ export default function FeaturesPage() {
             Everything you need to understand<br />and improve your local presence.
           </h1>
           <p className="text-lg text-dim max-w-2xl mx-auto leading-relaxed">
-            Every Locallyndex feature is built around a clear purpose: helping your business appear more prominently to local customers and act on the intelligence that improves your position.
+            Every Locallndex feature is built around a clear purpose: helping your business appear more prominently to local customers and act on the intelligence that improves your position.
           </p>
         </div>
       </section>

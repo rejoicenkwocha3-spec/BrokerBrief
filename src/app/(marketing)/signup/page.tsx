@@ -85,8 +85,8 @@ export default function SignUpPage() {
         <div className="bg-white rounded-2xl border border-line p-10">
           <div className="flex justify-center mb-7">
             <div className="flex items-center gap-2.5">
-              <img src="/logo.svg" alt="Locallyndex" className="h-8 w-auto" />
-              <span className="font-bold text-charcoal text-xl">Locallyndex</span>
+              <img src="/logo.svg" alt="Locallndex" className="h-8 w-auto" />
+              <span className="font-bold text-charcoal text-xl">Locallndex</span>
             </div>
           </div>
           <h1 className="text-2xl font-bold text-charcoal mb-1 text-center">Create your account</h1>

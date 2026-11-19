@@ -85,8 +85,8 @@ export default function OnboardingPage() {
       <div className="w-full max-w-lg">
         {/* Logo */}
         <div className="flex items-center gap-2.5 justify-center mb-10">
-          <img src="/logo.svg" alt="Locallyndex" className="h-8 w-auto" />
-          <span className="font-bold text-charcoal text-xl">Locallyndex</span>
+          <img src="/logo.svg" alt="Locallndex" className="h-8 w-auto" />
+          <span className="font-bold text-charcoal text-xl">Locallndex</span>
         </div>
 
         {/* Progress */}

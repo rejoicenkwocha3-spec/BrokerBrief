@@ -40,7 +40,7 @@ export default async function BillingPage() {
 
   return (
     <div>
-      <TopBar title="Billing and Subscription" subtitle="Manage your Locallyndex plan" />
+      <TopBar title="Billing and Subscription" subtitle="Manage your Locallndex plan" />
       <div className="p-6 space-y-6">
 
         {/* Current plan status */}

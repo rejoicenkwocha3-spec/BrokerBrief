@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 
 export const metadata = {
-  title: 'Pricing | Locallyndex',
-  description: 'Locallyndex pricing plans for every business size. No hidden fees. Cancel any time.',
+  title: 'Pricing | Locallndex',
+  description: 'Locallndex pricing plans for every business size. No hidden fees. Cancel any time.',
 };
 
 const plans = [

@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { ArrowRight, BarChart2, Eye, Zap, MapPin, Star, Target, Shield, CheckCircle2 } from 'lucide-react';
 
 export const metadata = {
-  title: 'Platform | Locallyndex',
-  description: 'How the Locallyndex platform helps businesses understand their local presence, identify opportunities, and grow.',
+  title: 'Platform | Locallndex',
+  description: 'How the Locallndex platform helps businesses understand their local presence, identify opportunities, and grow.',
 };
 
 export default function PlatformPage() {
@@ -18,7 +18,7 @@ export default function PlatformPage() {
             Local business intelligence<br />built for real growth.
           </h1>
           <p className="text-lg text-dim max-w-2xl mx-auto leading-relaxed">
-            Locallyndex brings together the data, insights, and tools your business needs to improve its local visibility and attract more customers in a single, clean workspace.
+            Locallndex brings together the data, insights, and tools your business needs to improve its local visibility and attract more customers in a single, clean workspace.
           </p>
         </div>
       </section>
@@ -76,7 +76,7 @@ export default function PlatformPage() {
                   Your business data, organised and scored.
                 </h2>
                 <p className="text-dim leading-relaxed mb-6">
-                  Add your business once and Locallyndex builds a structured profile that tracks the information most important to local search performance. Add multiple locations and manage each from the same account.
+                  Add your business once and Locallndex builds a structured profile that tracks the information most important to local search performance. Add multiple locations and manage each from the same account.
                 </p>
                 <ul className="space-y-3">
                   {[
@@ -182,7 +182,7 @@ export default function PlatformPage() {
                   Your reputation at a glance.
                 </h2>
                 <p className="text-dim leading-relaxed mb-6">
-                  Review volume and rating quality directly affect local search rankings. Locallyndex surfaces your review data in one view, so you can see your overall reputation and prioritise responses.
+                  Review volume and rating quality directly affect local search rankings. Locallndex surfaces your review data in one view, so you can see your overall reputation and prioritise responses.
                 </p>
                 <ul className="space-y-3">
                   {[

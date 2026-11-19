@@ -5,27 +5,27 @@ import {
 } from 'lucide-react';
 
 export const metadata = {
-  title: 'Locallyndex: Local Business Visibility and Growth Platform',
+  title: 'Locallndex: Local Business Visibility and Growth Platform',
   description:
-    'Understand your local market, improve your online visibility, and discover smarter opportunities to grow your business with Locallyndex.',
+    'Understand your local market, improve your online visibility, and discover smarter opportunities to grow your business with Locallndex.',
 };
 
 const faqs = [
   {
-    q: 'What is Locallyndex?',
-    a: 'Locallyndex is a B2B SaaS platform that helps businesses improve their local online presence, monitor local search performance, track competitors, and act on AI-powered growth recommendations.',
+    q: 'What is Locallndex?',
+    a: 'Locallndex is a B2B SaaS platform that helps businesses improve their local online presence, monitor local search performance, track competitors, and act on AI-powered growth recommendations.',
   },
   {
-    q: 'Who is Locallyndex designed for?',
-    a: 'Locallyndex serves small and medium businesses, multi-location operators, marketing agencies managing local clients, retail businesses, and service-based businesses.',
+    q: 'Who is Locallndex designed for?',
+    a: 'Locallndex serves small and medium businesses, multi-location operators, marketing agencies managing local clients, retail businesses, and service-based businesses.',
   },
   {
-    q: 'Does Locallyndex require technical knowledge to use?',
+    q: 'Does Locallndex require technical knowledge to use?',
     a: 'No. The platform is designed to surface useful intelligence in plain language. You do not need marketing or technical expertise to understand your visibility score or act on recommendations.',
   },
   {
     q: 'Can I manage multiple business locations?',
-    a: 'Yes. Locallyndex supports multi-location management, allowing you to track visibility, reviews, and performance for each location from a single dashboard.',
+    a: 'Yes. Locallndex supports multi-location management, allowing you to track visibility, reviews, and performance for each location from a single dashboard.',
   },
   {
     q: 'How is payment handled?',
@@ -49,7 +49,7 @@ export default function HomePage() {
             Make Your Business<br />Easier to Find.
           </h1>
           <p className="text-lg md:text-xl text-dim max-w-2xl mx-auto mb-10 leading-relaxed">
-            Understand your local market, improve your online visibility, and discover smarter opportunities to grow your business with Locallyndex.
+            Understand your local market, improve your online visibility, and discover smarter opportunities to grow your business with Locallndex.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
@@ -75,8 +75,8 @@ export default function HomePage() {
             {/* Mock dashboard header */}
             <div className="border-b border-line px-6 py-4 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <img src="/logo.svg" alt="Locallyndex" className="h-6 w-auto" />
-                <span className="font-semibold text-charcoal text-sm">Locallyndex</span>
+                <img src="/logo.svg" alt="Locallndex" className="h-6 w-auto" />
+                <span className="font-semibold text-charcoal text-sm">Locallndex</span>
               </div>
               <div className="flex items-center gap-6">
                 <span className="text-xs text-dim">Overview</span>
@@ -128,7 +128,7 @@ export default function HomePage() {
               Three capabilities. One platform.
             </h2>
             <p className="text-dim max-w-xl mx-auto">
-              Locallyndex combines local market intelligence, visibility management, and growth tools into a single, coherent workspace for your business.
+              Locallndex combines local market intelligence, visibility management, and growth tools into a single, coherent workspace for your business.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
@@ -165,7 +165,7 @@ export default function HomePage() {
       <section className="py-20">
         <div className="max-w-5xl mx-auto px-5">
           <div className="text-center mb-14">
-            <p className="section-label mb-3">Why Locallyndex</p>
+            <p className="section-label mb-3">Why Locallndex</p>
             <h2 className="text-3xl md:text-4xl font-bold text-charcoal tracking-tight">
               Everything your local presence needs.
             </h2>
@@ -359,7 +359,7 @@ export default function HomePage() {
               {
                 step: '01',
                 title: 'Add your business',
-                desc: 'Enter your business details and location. Locallyndex builds your starting profile and pulls available public data.',
+                desc: 'Enter your business details and location. Locallndex builds your starting profile and pulls available public data.',
               },
               {
                 step: '02',
@@ -497,7 +497,7 @@ export default function HomePage() {
             Start improving your local<br />presence today.
           </h2>
           <p className="text-lg text-dim mb-10">
-            Join businesses using Locallyndex to understand, improve, and grow their local market position.
+            Join businesses using Locallndex to understand, improve, and grow their local market position.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link

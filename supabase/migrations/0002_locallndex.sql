@@ -1,4 +1,4 @@
--- Locallyndex data model migration
+-- Locallndex data model migration
 -- Adds: business_profiles, locations, visibility_snapshots, review_summaries,
 --        tracked_competitors, ai_recommendations, subscriptions
 -- Updates: profiles table with new fields

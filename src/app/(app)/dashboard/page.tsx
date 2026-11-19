@@ -74,7 +74,7 @@ export default async function DashboardPage() {
             </div>
             <h2 className="text-lg font-semibold text-charcoal mb-2">Add your first business</h2>
             <p className="text-sm text-dim max-w-sm mx-auto mb-6">
-              Start by adding your business profile. Locallyndex will calculate your visibility score and generate recommendations.
+              Start by adding your business profile. Locallndex will calculate your visibility score and generate recommendations.
             </p>
             <Link
               href="/business-profiles"

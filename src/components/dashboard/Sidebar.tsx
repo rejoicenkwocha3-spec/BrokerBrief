@@ -48,8 +48,8 @@ export function Sidebar({ userEmail, userFirstName, userLastName }: SidebarProps
       {/* Logo */}
       <div className="px-5 py-5 border-b border-line">
         <Link href="/dashboard" className="flex items-center gap-2.5">
-          <img src="/logo.svg" alt="Locallyndex" className="h-7 w-auto" />
-          <span className="font-bold text-charcoal">Locallyndex</span>
+          <img src="/logo.svg" alt="Locallndex" className="h-7 w-auto" />
+          <span className="font-bold text-charcoal">Locallndex</span>
         </Link>
       </div>
 
