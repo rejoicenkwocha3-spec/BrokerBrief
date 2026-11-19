@@ -2,8 +2,19 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: { default: 'BrokerBrief', template: '%s | BrokerBrief' },
-  description: 'The AI Operating System for Modern Brokerages. The Intelligence Behind Every Deal.',
+  title: { default: 'Locallndex', template: '%s | Locallndex' },
+  description: 'The local business visibility and growth intelligence platform. Understand your market, improve your online presence, and outperform competitors.',
+  openGraph: {
+    title: 'Locallndex',
+    description: 'The local business visibility and growth intelligence platform.',
+    siteName: 'Locallndex',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Locallndex',
+    description: 'The local business visibility and growth intelligence platform.',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
