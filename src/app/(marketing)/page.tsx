@@ -1,201 +1,290 @@
 import Link from 'next/link';
-import { ArrowRight, Users, Calendar, Kanban, FileText, BarChart2, Brain, Shield, CheckCircle2, Sparkles, Zap, Globe, AlertCircle, TrendingUp, Database, Clock } from 'lucide-react';
+import {
+  ArrowRight, MapPin, TrendingUp, Eye, Star, BarChart2, Shield,
+  CheckCircle2, ChevronDown, Search, Zap, Target, Globe, Users,
+} from 'lucide-react';
+
+export const metadata = {
+  title: 'Locallndex: Local Business Visibility and Growth Platform',
+  description:
+    'Understand your local market, improve your online visibility, and discover smarter opportunities to grow your business with Locallndex.',
+};
+
+const faqs = [
+  {
+    q: 'What is Locallndex?',
+    a: 'Locallndex is a B2B SaaS platform that helps businesses improve their local online presence, monitor local search performance, track competitors, and act on AI-powered growth recommendations.',
+  },
+  {
+    q: 'Who is Locallndex designed for?',
+    a: 'Locallndex serves small and medium businesses, multi-location operators, marketing agencies managing local clients, retail businesses, and service-based businesses.',
+  },
+  {
+    q: 'Does Locallndex require technical knowledge to use?',
+    a: 'No. The platform is designed to surface useful intelligence in plain language. You do not need marketing or technical expertise to understand your visibility score or act on recommendations.',
+  },
+  {
+    q: 'Can I manage multiple business locations?',
+    a: 'Yes. Locallndex supports multi-location management, allowing you to track visibility, reviews, and performance for each location from a single dashboard.',
+  },
+  {
+    q: 'How is payment handled?',
+    a: 'Subscriptions are managed via Selar. After completing checkout, your plan is activated and you gain full access to your selected tier.',
+  },
+];
 
 export default function HomePage() {
   return (
-    <div className="bg-soft-white">
+    <div className="bg-surface">
+
       {/* Hero */}
-      <section className="bg-forest text-white pt-20 pb-28 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #079B65 0%, transparent 50%), radial-gradient(circle at 80% 50%, #8154E8 0%, transparent 50%)' }} />
-        <div className="max-w-5xl mx-auto px-5 text-center relative">
-          <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm mb-8">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-brand" />
-            <span className="text-white/80">Introducing BrokerBrief AI Associate</span>
+      <section className="relative pt-20 pb-24 overflow-hidden bg-white">
+        <div className="absolute inset-0 bg-dots opacity-60" />
+        <div className="relative max-w-4xl mx-auto px-5 text-center">
+          <div className="inline-flex items-center gap-2 border border-line rounded-full px-4 py-1.5 text-sm text-dim mb-8">
+            <MapPin className="w-3.5 h-3.5 text-brand" />
+            <span>Local Business Intelligence Platform</span>
           </div>
-          <h1 className="font-playfair text-4xl md:text-6xl font-bold leading-tight mb-6">
-            Your brokerage.<br />
-            <em className="italic not-italic" style={{ color: '#10B981' }}>Smarter</em>, faster, and<br />
-            powered by AI.
+          <h1 className="text-4xl md:text-6xl font-bold text-charcoal leading-tight mb-6 tracking-tight">
+            Make Your Business<br />Easier to Find.
           </h1>
-          <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed">
-            BrokerBrief is the complete AI operating system for modern brokerages: CRM, pipeline, meetings, documents, and intelligent insights in one unified platform.
+          <p className="text-lg md:text-xl text-dim max-w-2xl mx-auto mb-10 leading-relaxed">
+            Understand your local market, improve your online visibility, and discover smarter opportunities to grow your business with Locallndex.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/signup" className="inline-flex items-center gap-2 bg-emerald-brand hover:bg-[#068a58] text-white font-semibold px-7 py-3.5 rounded-xl text-base transition-colors">
-              Start free trial <ArrowRight className="w-4 h-4" />
+            <Link
+              href="/signup"
+              className="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-semibold px-7 py-3.5 rounded-lg text-base transition-colors"
+            >
+              Get Started <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link href="/pricing" className="inline-flex items-center gap-2 border border-white/30 hover:bg-white/10 text-white font-medium px-7 py-3.5 rounded-xl text-base transition-colors">
-              See pricing
+            <Link
+              href="/platform"
+              className="inline-flex items-center gap-2 border border-line hover:bg-surface text-charcoal font-medium px-7 py-3.5 rounded-lg text-base transition-colors"
+            >
+              Explore Platform
             </Link>
           </div>
-          <p className="mt-6 text-sm text-white/50">No credit card required · 14-day free trial · Setup in 5 minutes</p>
         </div>
       </section>
 
-      {/* Social Proof */}
-      <section className="py-16 bg-white border-b border-gray-100">
-        <div className="max-w-5xl mx-auto px-5 text-center">
-          <p className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-8">Trusted by forward-thinking brokerages</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { n: '10,000+', l: 'Deals managed' },
-              { n: '500+', l: 'Brokerages onboarded' },
-              { n: '98%', l: 'Client retention rate' },
-              { n: '3.2×', l: 'Average revenue growth' },
-            ].map(({ n, l }) => (
-              <div key={l}>
-                <p className="text-3xl font-bold text-forest mb-1">{n}</p>
-                <p className="text-sm text-gray-500">{l}</p>
+      {/* Dashboard Preview */}
+      <section className="py-16 bg-surface border-y border-line">
+        <div className="max-w-5xl mx-auto px-5">
+          <div className="bg-white border border-line rounded-2xl shadow-sm overflow-hidden">
+            {/* Mock dashboard header */}
+            <div className="border-b border-line px-6 py-4 flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <img src="/logo.svg" alt="Locallndex" className="h-6 w-auto" />
+                <span className="font-semibold text-charcoal text-sm">Locallndex</span>
               </div>
-            ))}
+              <div className="flex items-center gap-6">
+                <span className="text-xs text-dim">Overview</span>
+                <span className="text-xs text-dim">Visibility</span>
+                <span className="text-xs text-dim">Reviews</span>
+                <span className="text-xs text-brand font-medium">Analytics</span>
+              </div>
+            </div>
+            {/* Mock metric cards */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
+              {[
+                { label: 'Visibility Score', value: '74', unit: '/100', trend: '+6' },
+                { label: 'Local Search Rank', value: '#3', unit: '', trend: '+2' },
+                { label: 'Review Rating', value: '4.6', unit: '/ 5', trend: '+0.2' },
+                { label: 'Monthly Impressions', value: '2,840', unit: '', trend: '+18%' },
+              ].map(({ label, value, unit, trend }, i) => (
+                <div key={label} className={`p-5 ${i < 3 ? 'border-r border-line' : ''}`}>
+                  <p className="text-xs text-dim mb-1">{label}</p>
+                  <p className="text-2xl font-bold text-charcoal">
+                    {value}<span className="text-sm font-normal text-dim">{unit}</span>
+                  </p>
+                  <p className="text-xs text-brand mt-1">{trend} this month</p>
+                </div>
+              ))}
+            </div>
+            {/* Mock chart area */}
+            <div className="p-6 border-t border-line">
+              <div className="flex items-end gap-2 h-24">
+                {[40, 55, 48, 70, 65, 74, 80, 72, 85, 78, 90, 88].map((h, i) => (
+                  <div
+                    key={i}
+                    className="flex-1 rounded-t-sm"
+                    style={{ height: `${h}%`, backgroundColor: i === 11 ? '#2047FF' : '#EEF2FF' }}
+                  />
+                ))}
+              </div>
+              <p className="text-xs text-dim mt-3">Visibility score trend over 12 months</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Problem / Solution */}
-      <section className="py-20">
+      {/* Platform Introduction */}
+      <section className="py-20 bg-white">
         <div className="max-w-5xl mx-auto px-5">
           <div className="text-center mb-14">
-            <p className="text-xs font-semibold text-emerald-brand uppercase tracking-widest mb-3">The Problem</p>
-            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-charcoal mb-4">
-              Your brokerage runs on scattered tools and lost context.
+            <p className="section-label mb-3">The Platform</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-charcoal mb-4 tracking-tight">
+              Three capabilities. One platform.
             </h2>
-            <p className="text-gray-500 max-w-2xl mx-auto">Spreadsheets, email threads, disconnected CRMs, and manual follow-ups — your team spends more time managing tools than managing clients.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6 mb-14">
-            {[
-              { icon: Database, title: 'No single source of truth', desc: 'Client data lives in 5 different places. No one has the full picture.' },
-              { icon: Clock, title: 'Deals slip through the cracks', desc: 'Without structured pipeline management, opportunities are lost to follow-up failure.' },
-              { icon: TrendingUp, title: 'Insights are manual', desc: "Your team spends hours building reports instead of building relationships." },
-            ].map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="bg-red-50 border border-red-100 rounded-xl p-5">
-                <div className="w-9 h-9 rounded-lg bg-red-100 flex items-center justify-center mb-3">
-                  <Icon className="w-4.5 h-4.5 text-red-500" />
-                </div>
-                <h3 className="font-semibold text-charcoal mb-2">{title}</h3>
-                <p className="text-sm text-gray-500">{desc}</p>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mb-14">
-            <p className="text-xs font-semibold text-emerald-brand uppercase tracking-widest mb-3">The Solution</p>
-            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-charcoal mb-4">
-              Everything your brokerage needs. Nothing you don&apos;t.
-            </h2>
+            <p className="text-dim max-w-xl mx-auto">
+              Locallndex combines local market intelligence, visibility management, and growth tools into a single, coherent workspace for your business.
+            </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { icon: Users, title: 'Unified client intelligence', desc: 'Every client, deal, meeting, and document in one structured workspace.' },
-              { icon: Kanban, title: 'AI-powered pipeline', desc: 'Smart deal tracking with automated follow-ups and next-step recommendations.' },
-              { icon: BarChart2, title: 'Instant insights', desc: 'Ask your AI Associate anything about your business. Get answers in seconds.' },
+              {
+                icon: BarChart2,
+                title: 'Intelligence',
+                desc: 'Understand how your business appears in local search, what your competitors are doing, and where your market opportunities are.',
+              },
+              {
+                icon: Eye,
+                title: 'Visibility',
+                desc: 'Monitor your local search rankings, business profile completeness, and online presence across the platforms that matter most.',
+              },
+              {
+                icon: TrendingUp,
+                title: 'Growth',
+                desc: 'Receive prioritised, actionable recommendations tailored to your business category, location, and competitive position.',
+              },
             ].map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="bg-mint border border-green-100 rounded-xl p-5">
-                <div className="w-9 h-9 rounded-lg bg-white/60 flex items-center justify-center mb-3">
-                  <Icon className="w-4.5 h-4.5 text-forest" />
+              <div key={title} className="bg-surface border border-line rounded-xl p-6">
+                <div className="w-10 h-10 rounded-lg bg-haze flex items-center justify-center mb-4">
+                  <Icon className="w-5 h-5 text-brand" />
                 </div>
-                <h3 className="font-semibold text-charcoal mb-2">{title}</h3>
-                <p className="text-sm text-gray-500">{desc}</p>
+                <h3 className="font-semibold text-charcoal text-lg mb-2">{title}</h3>
+                <p className="text-sm text-dim leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* AI Associate */}
-      <section className="py-20 bg-gradient-to-br from-[#1a0533] to-[#0d2b1a] text-white">
-        <div className="max-w-5xl mx-auto px-5">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-ai-purple/20 border border-ai-purple/30 rounded-full px-4 py-1.5 text-sm mb-6">
-              <Sparkles className="w-3.5 h-3.5 text-ai-purple" />
-              <span className="text-ai-purple font-medium">AI Associate</span>
-            </div>
-            <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4">
-              Your intelligent business partner. Available 24/7.
-            </h2>
-            <p className="text-white/60 max-w-xl mx-auto">Ask anything about your clients, deals, or pipeline. Get instant, accurate answers powered by your real business data.</p>
-          </div>
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-6 max-w-2xl mx-auto">
-            {[
-              'Which clients need my attention this week?',
-              'Show me deals that haven\'t progressed in 2 weeks.',
-              'Summarise my last meeting with Blackstone Capital.',
-              'Which opportunities should my team prioritise this quarter?',
-              'Draft a follow-up email for my pipeline deals.',
-            ].map((prompt) => (
-              <div key={prompt} className="flex items-start gap-3 mb-4 last:mb-0">
-                <div className="w-6 h-6 rounded-full bg-ai-purple/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Sparkles className="w-3 h-3 text-ai-purple" />
-                </div>
-                <p className="text-sm text-white/70 italic">&ldquo;{prompt}&rdquo;</p>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <Link href="/signup" className="inline-flex items-center gap-2 bg-ai-purple hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-xl text-sm transition-colors">
-              Try AI Associate free <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Platform Features */}
+      {/* Key Benefits */}
       <section className="py-20">
         <div className="max-w-5xl mx-auto px-5">
           <div className="text-center mb-14">
-            <p className="text-xs font-semibold text-emerald-brand uppercase tracking-widest mb-3">Platform</p>
-            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-charcoal mb-4">
-              Everything your team needs to close more deals.
+            <p className="section-label mb-3">Why Locallndex</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-charcoal tracking-tight">
+              Everything your local presence needs.
             </h2>
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="space-y-6">
+              {[
+                {
+                  icon: Search,
+                  title: 'Know your local search position',
+                  desc: 'Track where your business ranks in local search results and discover the keywords driving visibility in your area.',
+                },
+                {
+                  icon: Target,
+                  title: 'Identify gaps before competitors do',
+                  desc: 'Surface opportunities in your local market: underserved categories, unmonitored keywords, and profile weaknesses.',
+                },
+                {
+                  icon: Star,
+                  title: 'Understand your review landscape',
+                  desc: 'Monitor review volume, average ratings, and sentiment across platforms without switching between tabs.',
+                },
+                {
+                  icon: Zap,
+                  title: 'Act on AI-powered recommendations',
+                  desc: 'Receive prioritised actions tailored to your business. No generic advice: specific steps ranked by impact.',
+                },
+              ].map(({ icon: Icon, title, desc }) => (
+                <div key={title} className="flex gap-4">
+                  <div className="w-9 h-9 rounded-lg bg-haze flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Icon className="w-4.5 h-4.5 text-brand" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-charcoal mb-1">{title}</h3>
+                    <p className="text-sm text-dim leading-relaxed">{desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="bg-white border border-line rounded-2xl p-6 space-y-4">
+              <p className="text-xs font-semibold text-dim uppercase tracking-widest mb-2">AI Recommendations</p>
+              {[
+                { priority: 'High', title: 'Complete your Google Business Profile', desc: 'Adding opening hours increases click-through rate by 30% on average.' },
+                { priority: 'Medium', title: 'Respond to recent reviews', desc: '3 reviews from last week have no response. Responding improves trust signals.' },
+                { priority: 'Medium', title: 'Add photos to your profile', desc: 'Profiles with 10 or more photos receive significantly more engagement.' },
+              ].map(({ priority, title, desc }) => (
+                <div key={title} className="border border-line rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${priority === 'High' ? 'bg-brand text-white' : 'bg-haze text-brand'}`}>
+                      {priority}
+                    </span>
+                  </div>
+                  <p className="text-sm font-medium text-charcoal mb-1">{title}</p>
+                  <p className="text-xs text-dim">{desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Feature Highlights */}
+      <section className="py-20 bg-white">
+        <div className="max-w-5xl mx-auto px-5">
+          <div className="text-center mb-14">
+            <p className="section-label mb-3">Features</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-charcoal tracking-tight">
+              Built for serious local businesses.
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                icon: Users,
-                title: 'CRM and Client Management',
-                desc: 'Complete client profiles with activity history, notes, documents, and linked deals. Never lose context on a relationship.',
-                features: ['360° client profiles', 'Activity timeline', 'Custom segments and tags', 'Automated follow-up reminders'],
+                icon: MapPin,
+                title: 'Business Profile Management',
+                desc: 'Store and manage all your business profile data in one place. Track completeness and identify missing information.',
+                features: ['Profile completeness scoring', 'Multi-location support', 'Category and attribute tracking'],
               },
               {
-                icon: Kanban,
-                title: 'Deal Pipeline',
-                desc: 'Visual Kanban pipeline with 7 customisable stages. Track deal value, probability, and expected close dates.',
-                features: ['Visual Kanban board', 'Deal value tracking', 'Win/loss analysis', 'Pipeline velocity metrics'],
+                icon: Search,
+                title: 'Local Search Intelligence',
+                desc: 'Monitor local search rankings for target keywords and understand how customers find businesses in your category.',
+                features: ['Keyword rank tracking', 'Local pack visibility', 'Search volume data'],
               },
               {
-                icon: Calendar,
-                title: 'Meeting Intelligence',
-                desc: 'Log meetings with notes and transcripts. AI automatically generates summaries and extracts action items.',
-                features: ['Meeting notes and transcripts', 'AI-generated summaries', 'Action item extraction', 'Calendar integration ready'],
+                icon: Target,
+                title: 'Competitor Monitoring',
+                desc: 'Track the visibility scores, review ratings, and profile changes of your direct local competitors.',
+                features: ['Competitor visibility scores', 'Side-by-side comparison', 'Profile change alerts'],
               },
               {
-                icon: FileText,
-                title: 'Document Management',
-                desc: 'Secure document storage with per-client organisation, category tagging, and AI-powered summarisation.',
-                features: ['Secure cloud storage', 'Per-client organisation', 'AI document summaries', 'Signed URL access control'],
+                icon: Star,
+                title: 'Review and Reputation Insights',
+                desc: 'Aggregate review data across platforms to understand your reputation and identify response priorities.',
+                features: ['Multi-platform aggregation', 'Sentiment summary', 'Response rate tracking'],
               },
               {
                 icon: BarChart2,
-                title: 'Business Intelligence',
-                desc: 'Real-time analytics on clients, deals, revenue, and team performance. All from your actual data.',
-                features: ['Revenue dashboards', 'Pipeline analytics', 'Team performance', 'Conversion tracking'],
+                title: 'Local Market Analytics',
+                desc: 'Visualise your performance trends and understand what is driving changes in your visibility and engagement.',
+                features: ['Visibility score history', 'Impression trends', 'Performance benchmarking'],
               },
               {
-                icon: Users,
-                title: 'Team Collaboration',
-                desc: 'Multi-role team management with organisation-level data isolation and granular permission controls.',
-                features: ['6 permission roles', 'Invitation system', 'Shared pipeline view', 'Audit-ready access control'],
+                icon: Zap,
+                title: 'AI Recommendations',
+                desc: 'Receive a prioritised list of improvements tailored to your specific business, category, and location.',
+                features: ['Priority-ranked actions', 'Effort vs. impact scoring', 'Weekly updated suggestions'],
               },
             ].map(({ icon: Icon, title, desc, features }) => (
-              <div key={title} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-11 h-11 rounded-xl bg-mint flex items-center justify-center mb-4">
-                  <Icon className="w-5 h-5 text-forest" />
+              <div key={title} className="bg-surface border border-line rounded-xl p-6">
+                <div className="w-10 h-10 rounded-lg bg-haze flex items-center justify-center mb-4">
+                  <Icon className="w-5 h-5 text-brand" />
                 </div>
-                <h3 className="font-semibold text-charcoal text-lg mb-2">{title}</h3>
-                <p className="text-sm text-gray-500 mb-4 leading-relaxed">{desc}</p>
+                <h3 className="font-semibold text-charcoal mb-2">{title}</h3>
+                <p className="text-sm text-dim mb-4 leading-relaxed">{desc}</p>
                 <ul className="space-y-1.5">
                   {features.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-sm text-gray-600">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-bright-green flex-shrink-0" />
+                    <li key={f} className="flex items-center gap-2 text-xs text-dim">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-brand flex-shrink-0" />
                       {f}
                     </li>
                   ))}
@@ -203,77 +292,197 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Workflow Automation */}
-      <section className="py-20 bg-white">
-        <div className="max-w-5xl mx-auto px-5">
-          <div className="grid md:grid-cols-2 gap-14 items-center">
-            <div>
-              <p className="text-xs font-semibold text-emerald-brand uppercase tracking-widest mb-3">Automation</p>
-              <h2 className="font-playfair text-3xl md:text-4xl font-bold text-charcoal mb-5">
-                Eliminate repetitive work. Automate the routine.
-              </h2>
-              <p className="text-gray-500 mb-6 leading-relaxed">
-                BrokerBrief handles the operational overhead — task reminders, follow-up scheduling, pipeline updates — so your team focuses on conversations that close deals.
-              </p>
-              <ul className="space-y-3">
-                {[
-                  'Automatic activity logging on every client interaction',
-                  'Smart task creation from meeting action items',
-                  'Pipeline stage updates with deal history tracking',
-                  'Overdue task and stale deal alerts',
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-gray-600">
-                    <Zap className="w-4 h-4 text-emerald-brand flex-shrink-0 mt-0.5" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-soft-white rounded-2xl p-6 border border-gray-100">
-              <div className="space-y-3">
-                {[
-                  { step: '01', title: 'Client meeting logged', desc: 'Notes and transcript saved automatically' },
-                  { step: '02', title: 'AI generates summary', desc: 'Key points and action items extracted' },
-                  { step: '03', title: 'Tasks created', desc: 'Follow-up tasks assigned to team members' },
-                  { step: '04', title: 'Pipeline updated', desc: 'Deal stage progressed based on meeting outcome' },
-                ].map(({ step, title, desc }) => (
-                  <div key={step} className="flex items-start gap-4 bg-white rounded-xl p-4 border border-gray-100">
-                    <span className="text-xs font-bold text-emerald-brand bg-mint px-2 py-1 rounded-md flex-shrink-0">{step}</span>
-                    <div>
-                      <p className="text-sm font-semibold text-charcoal">{title}</p>
-                      <p className="text-xs text-gray-400 mt-0.5">{desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="text-center mt-10">
+            <Link href="/features" className="inline-flex items-center gap-2 text-brand font-medium text-sm hover:underline">
+              View all features <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Security */}
-      <section className="py-20 bg-forest text-white">
+      {/* Solutions Overview */}
+      <section className="py-20">
         <div className="max-w-5xl mx-auto px-5">
-          <div className="text-center mb-12">
-            <p className="text-xs font-semibold text-emerald-brand uppercase tracking-widest mb-3">Security and Compliance</p>
-            <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4">Built for brokerages that handle sensitive data.</h2>
-            <p className="text-white/60 max-w-xl mx-auto">Enterprise-grade security with multi-tenant data isolation, role-based access control, and signed document access — by design, not as an afterthought.</p>
+          <div className="text-center mb-14">
+            <p className="section-label mb-3">Solutions</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-charcoal tracking-tight">
+              For every business that relies on local customers.
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-5">
+            {[
+              {
+                title: 'Small and Medium Businesses',
+                desc: 'Get a clear picture of your local search position and take targeted steps to reach more nearby customers.',
+              },
+              {
+                title: 'Multi-Location Businesses',
+                desc: 'Manage visibility, reviews, and competitors for each location from a single account dashboard.',
+              },
+              {
+                title: 'Marketing Agencies',
+                desc: 'Deliver local performance reporting and data-driven recommendations for every client you manage.',
+              },
+              {
+                title: 'Retail and Service Businesses',
+                desc: 'Understand what drives foot traffic and digital discovery so you can invest in what actually works.',
+              },
+            ].map(({ title, desc }) => (
+              <div key={title} className="bg-white border border-line rounded-xl p-6 flex gap-4">
+                <div className="w-2 h-2 rounded-full bg-brand flex-shrink-0 mt-2" />
+                <div>
+                  <h3 className="font-semibold text-charcoal mb-1.5">{title}</h3>
+                  <p className="text-sm text-dim leading-relaxed">{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Link href="/solutions" className="inline-flex items-center gap-2 text-brand font-medium text-sm hover:underline">
+              View all solutions <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-5">
+          <div className="text-center mb-14">
+            <p className="section-label mb-3">How It Works</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-charcoal tracking-tight">
+              Set up in minutes. See results immediately.
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                step: '01',
+                title: 'Add your business',
+                desc: 'Enter your business details and location. Locallndex builds your starting profile and pulls available public data.',
+              },
+              {
+                step: '02',
+                title: 'Review your visibility score',
+                desc: 'Your dashboard shows your current local search position, profile completeness, and competitive standing.',
+              },
+              {
+                step: '03',
+                title: 'Act on recommendations',
+                desc: 'Follow prioritised AI recommendations to improve your score, respond to reviews, and outperform nearby competitors.',
+              },
+            ].map(({ step, title, desc }) => (
+              <div key={step} className="text-center">
+                <div className="w-12 h-12 rounded-full border-2 border-brand text-brand font-bold text-sm flex items-center justify-center mx-auto mb-4">
+                  {step}
+                </div>
+                <h3 className="font-semibold text-charcoal mb-2">{title}</h3>
+                <p className="text-sm text-dim leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Preview */}
+      <section className="py-20">
+        <div className="max-w-5xl mx-auto px-5">
+          <div className="text-center mb-14">
+            <p className="section-label mb-3">Pricing</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-charcoal tracking-tight">
+              Straightforward plans for every stage.
+            </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { icon: Shield, title: 'Row-Level Security', desc: 'Every database query is scoped to your organisation. No shared data, no data leakage between tenants.' },
-              { icon: Globe, title: 'Multi-Tenant Architecture', desc: 'Complete organisation isolation with 6-tier role system: Owner, Admin, Manager, Broker, Staff.' },
-              { icon: Brain, title: 'Your data stays yours', desc: 'Documents stored with signed URLs. No public access. AI processes your data, never shares it.' },
-            ].map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="bg-white/5 border border-white/10 rounded-xl p-6">
-                <div className="w-10 h-10 rounded-lg bg-emerald-brand/20 flex items-center justify-center mb-4">
-                  <Icon className="w-5 h-5 text-emerald-brand" />
+              {
+                name: 'Starter',
+                price: '$47',
+                period: '/month',
+                desc: 'For independent businesses getting started with local visibility.',
+                features: ['1 business location', 'Visibility score tracking', 'Basic competitor monitoring', 'Review summary dashboard', 'AI recommendations'],
+                href: 'https://selar.co/47plan',
+                highlight: false,
+              },
+              {
+                name: 'Growth',
+                price: '$57',
+                period: '/month',
+                desc: 'For businesses ready to grow their local market presence.',
+                features: ['Up to 3 locations', 'Advanced visibility analytics', 'Full competitor monitoring', 'Review management tools', 'Priority AI recommendations', 'Monthly performance reports'],
+                href: 'https://selar.co/57plan',
+                highlight: true,
+              },
+              {
+                name: 'Scale',
+                price: '$97',
+                period: '/month',
+                desc: 'For multi-location businesses and agencies managing multiple clients.',
+                features: ['Up to 10 locations', 'Full platform access', 'API access', 'White-label reports', 'Dedicated support', 'All Growth features'],
+                href: 'https://selar.co/97plan',
+                highlight: false,
+              },
+            ].map(({ name, price, period, desc, features, href, highlight }) => (
+              <div
+                key={name}
+                className={`rounded-xl border p-7 relative ${highlight ? 'bg-brand border-brand text-white' : 'bg-white border-line'}`}
+              >
+                {highlight && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-charcoal text-white text-xs font-semibold px-3 py-1 rounded-full">
+                    Most Popular
+                  </div>
+                )}
+                <h3 className={`font-bold text-lg mb-1 ${highlight ? 'text-white' : 'text-charcoal'}`}>{name}</h3>
+                <div className="flex items-baseline gap-1 mb-2">
+                  <span className={`text-4xl font-bold ${highlight ? 'text-white' : 'text-charcoal'}`}>{price}</span>
+                  <span className={`text-sm ${highlight ? 'text-white/70' : 'text-dim'}`}>{period}</span>
                 </div>
-                <h3 className="font-semibold mb-2">{title}</h3>
-                <p className="text-sm text-white/60">{desc}</p>
+                <p className={`text-sm mb-6 ${highlight ? 'text-white/70' : 'text-dim'}`}>{desc}</p>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-full py-2.5 rounded-lg text-sm font-semibold text-center block mb-6 transition-colors ${
+                    highlight
+                      ? 'bg-white text-brand hover:bg-white/90'
+                      : 'bg-brand text-white hover:bg-brand-dark'
+                  }`}
+                >
+                  Get {name}
+                </a>
+                <ul className="space-y-2.5">
+                  {features.map((f) => (
+                    <li key={f} className="flex items-center gap-2 text-sm">
+                      <CheckCircle2 className={`w-4 h-4 flex-shrink-0 ${highlight ? 'text-white/70' : 'text-brand'}`} />
+                      <span className={highlight ? 'text-white/80' : 'text-dim'}>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Link href="/pricing" className="inline-flex items-center gap-2 text-brand font-medium text-sm hover:underline">
+              Compare all plans <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20 bg-white">
+        <div className="max-w-3xl mx-auto px-5">
+          <div className="text-center mb-14">
+            <p className="section-label mb-3">FAQ</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-charcoal tracking-tight">
+              Common questions.
+            </h2>
+          </div>
+          <div className="space-y-4">
+            {faqs.map(({ q, a }) => (
+              <div key={q} className="border border-line rounded-xl p-6">
+                <h3 className="font-semibold text-charcoal mb-2">{q}</h3>
+                <p className="text-sm text-dim leading-relaxed">{a}</p>
               </div>
             ))}
           </div>
@@ -281,22 +490,32 @@ export default function HomePage() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 bg-soft-white">
-        <div className="max-w-3xl mx-auto px-5 text-center">
-          <h2 className="font-playfair text-4xl md:text-5xl font-bold text-charcoal mb-5">
-            The intelligence behind every deal.
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-dots opacity-60" />
+        <div className="relative max-w-3xl mx-auto px-5 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-charcoal mb-5 tracking-tight">
+            Start improving your local<br />presence today.
           </h2>
-          <p className="text-lg text-gray-500 mb-10">Start your 14-day free trial. No credit card required.</p>
+          <p className="text-lg text-dim mb-10">
+            Join businesses using Locallndex to understand, improve, and grow their local market position.
+          </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/signup" className="inline-flex items-center gap-2 bg-emerald-brand hover:bg-[#068a58] text-white font-semibold px-8 py-4 rounded-xl text-base transition-colors">
-              Start free trial <ArrowRight className="w-4 h-4" />
+            <Link
+              href="/signup"
+              className="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-semibold px-8 py-4 rounded-lg text-base transition-colors"
+            >
+              Get Started <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link href="/pricing" className="inline-flex items-center gap-2 border border-gray-200 hover:bg-light-grey text-charcoal font-medium px-8 py-4 rounded-xl text-base transition-colors">
+            <Link
+              href="/pricing"
+              className="inline-flex items-center gap-2 border border-line hover:bg-white text-charcoal font-medium px-8 py-4 rounded-lg text-base transition-colors"
+            >
               View pricing
             </Link>
           </div>
         </div>
       </section>
+
     </div>
   );
 }

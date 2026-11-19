@@ -8,10 +8,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants = {
-  primary: 'bg-emerald-brand hover:bg-[#068a58] text-white font-semibold',
-  ghost: 'border border-gray-200 hover:bg-light-grey text-charcoal font-medium',
+  primary: 'bg-brand hover:bg-brand-dark text-white font-semibold',
+  ghost: 'border border-line hover:bg-surface text-charcoal font-medium',
   destructive: 'bg-red-500 hover:bg-red-600 text-white font-semibold',
-  outline: 'border border-emerald-brand text-emerald-brand hover:bg-mint font-medium',
+  outline: 'border border-brand text-brand hover:bg-haze font-medium',
 };
 
 const sizes = {

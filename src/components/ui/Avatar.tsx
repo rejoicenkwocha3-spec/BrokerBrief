@@ -17,7 +17,7 @@ export function Avatar({ firstName, lastName, imageUrl, size = 'md', className }
     return <img src={imageUrl} alt={initials} className={cn('rounded-full object-cover', sizes[size], className)} />;
   }
   return (
-    <div className={cn('rounded-full bg-forest text-white flex items-center justify-center font-semibold flex-shrink-0', sizes[size], className)}>
+    <div className={cn('rounded-full bg-brand text-white flex items-center justify-center font-semibold flex-shrink-0', sizes[size], className)}>
       {initials}
     </div>
   );

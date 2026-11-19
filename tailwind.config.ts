@@ -1,25 +1,34 @@
 import type { Config } from 'tailwindcss'
+
 const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
       colors: {
-        'forest': '#064B2E',
-        'emerald-brand': '#079B65',
-        'bright-green': '#10B981',
-        'mint': '#E6F5EC',
-        'soft-white': '#FAFAF8',
-        'light-grey': '#F1F3F1',
-        'charcoal': '#202923',
-        'ai-purple': '#8154E8',
+        brand: '#2047FF',
+        'brand-dark': '#1538E0',
+        charcoal: '#171717',
+        surface: '#FAFAFC',
+        line: '#E6E6EB',
+        dim: '#777985',
+        haze: '#EEF2FF',
+        // Legacy aliases kept for smooth migration
+        'light-bg': '#FAFAFC',
+        'border-grey': '#E6E6EB',
+        'soft-blue': '#EEF2FF',
       },
       fontFamily: {
-        'playfair': ['"Playfair Display"', 'Georgia', 'serif'],
-        'inter': ['Inter', 'system-ui', 'sans-serif'],
-        'dm': ['"DM Sans"', 'system-ui', 'sans-serif'],
+        inter: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      backgroundImage: {
+        dots: 'radial-gradient(circle, #E6E6EB 1px, transparent 1px)',
+      },
+      backgroundSize: {
+        dots: '24px 24px',
       },
     },
   },
   plugins: [],
 }
+
 export default config

@@ -2,35 +2,34 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-  LayoutDashboard, Users, UserPlus, Kanban, Calendar, Sparkles,
-  FileText, CheckSquare, BarChart2, UserCheck, Settings2, LogOut,
+  LayoutDashboard, Building2, MapPin, Eye, Target, Star,
+  BarChart2, Zap, FileText, CreditCard, Settings, LogOut,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Avatar } from '@/components/ui/Avatar';
 import { createClient } from '@/lib/supabase/browser';
 import { useRouter } from 'next/navigation';
 
 const nav = [
-  { href: '/dashboard', label: 'Overview', icon: LayoutDashboard },
-  { href: '/clients', label: 'Clients', icon: Users },
-  { href: '/leads', label: 'Leads', icon: UserPlus },
-  { href: '/pipeline', label: 'Pipeline', icon: Kanban },
-  { href: '/meetings', label: 'Meetings', icon: Calendar },
-  { href: '/ai', label: 'AI Associate', icon: Sparkles, ai: true },
-  { href: '/documents', label: 'Documents', icon: FileText },
-  { href: '/tasks', label: 'Tasks', icon: CheckSquare },
-  { href: '/insights', label: 'Insights', icon: BarChart2 },
-  { href: '/team', label: 'Team', icon: UserCheck },
-  { href: '/settings', label: 'Settings', icon: Settings2 },
+  { href: '/dashboard', label: 'Overview', icon: LayoutDashboard, exact: true },
+  { href: '/business-profiles', label: 'Business Profiles', icon: Building2 },
+  { href: '/locations', label: 'Locations', icon: MapPin },
+  { href: '/visibility', label: 'Local Visibility', icon: Eye },
+  { href: '/competitors', label: 'Competitors', icon: Target },
+  { href: '/reviews', label: 'Reviews', icon: Star },
+  { href: '/analytics', label: 'Analytics', icon: BarChart2 },
+  { href: '/ai-recommendations', label: 'AI Recommendations', icon: Zap },
+  { href: '/reports', label: 'Reports', icon: FileText },
+  { href: '/billing', label: 'Billing', icon: CreditCard },
+  { href: '/settings', label: 'Settings', icon: Settings },
 ];
 
 interface SidebarProps {
-  orgName?: string;
+  userEmail?: string | null;
   userFirstName?: string | null;
   userLastName?: string | null;
 }
 
-export function Sidebar({ orgName, userFirstName, userLastName }: SidebarProps) {
+export function Sidebar({ userEmail, userFirstName, userLastName }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -40,54 +39,54 @@ export function Sidebar({ orgName, userFirstName, userLastName }: SidebarProps) 
     router.push('/signin');
   };
 
+  const displayName = userFirstName
+    ? `${userFirstName}${userLastName ? ' ' + userLastName : ''}`
+    : userEmail || 'Account';
+
   return (
-    <aside className="w-60 bg-white border-r border-gray-100 flex flex-col h-screen sticky top-0 flex-shrink-0">
+    <aside className="w-60 bg-white border-r border-line flex flex-col h-screen sticky top-0 flex-shrink-0">
       {/* Logo */}
-      <div className="px-5 py-5 border-b border-gray-100">
-        <div className="flex items-center gap-2.5">
-          <img src="/logo.svg" alt="BrokerBrief" className="h-8 w-8 rounded-md object-cover" />
-          <span className="font-playfair font-semibold text-charcoal text-lg">BrokerBrief</span>
-        </div>
+      <div className="px-5 py-5 border-b border-line">
+        <Link href="/dashboard" className="flex items-center gap-2.5">
+          <img src="/logo.svg" alt="Locallndex" className="h-7 w-auto" />
+          <span className="font-bold text-charcoal">Locallndex</span>
+        </Link>
       </div>
 
       {/* Nav */}
       <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-0.5">
-        {nav.map(({ href, label, icon: Icon, ai }) => {
-          const active = pathname === href || (href !== '/dashboard' && pathname.startsWith(href));
+        {nav.map(({ href, label, icon: Icon, exact }) => {
+          const active = exact ? pathname === href : (pathname === href || pathname.startsWith(href + '/'));
           return (
             <Link
               key={href}
               href={href}
               className={cn(
                 'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150',
-                active
-                  ? 'bg-mint text-forest'
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-charcoal',
-                ai && !active && 'text-ai-purple hover:text-ai-purple hover:bg-purple-50'
+                active ? 'bg-haze text-brand' : 'text-dim hover:bg-surface hover:text-charcoal'
               )}
             >
-              <Icon className={cn('w-4.5 h-4.5 flex-shrink-0', ai && 'text-ai-purple')} />
+              <Icon className="w-4 h-4 flex-shrink-0" />
               {label}
             </Link>
           );
         })}
       </nav>
 
-      {/* Footer */}
-      <div className="p-3 border-t border-gray-100">
-        {orgName && (
-          <p className="px-3 text-xs text-gray-400 mb-2 truncate font-medium">{orgName}</p>
-        )}
-        <div className="flex items-center gap-2.5 px-3 py-2">
-          <Avatar firstName={userFirstName} lastName={userLastName} size="sm" />
+      {/* User footer */}
+      <div className="p-3 border-t border-line">
+        <div className="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-surface transition-colors">
+          <div className="w-7 h-7 rounded-full bg-haze flex items-center justify-center flex-shrink-0">
+            <span className="text-xs font-semibold text-brand">
+              {displayName.charAt(0).toUpperCase()}
+            </span>
+          </div>
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-medium text-charcoal truncate">
-              {userFirstName} {userLastName}
-            </p>
+            <p className="text-xs font-medium text-charcoal truncate">{displayName}</p>
           </div>
           <button
             onClick={handleSignOut}
-            className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors"
+            className="p-1.5 rounded-lg hover:bg-line text-dim hover:text-charcoal transition-colors"
             title="Sign out"
           >
             <LogOut className="w-3.5 h-3.5" />
