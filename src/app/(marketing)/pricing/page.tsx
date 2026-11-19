@@ -18,15 +18,16 @@ const plans = [
     cta: 'Get started free',
     href: '/signup',
     highlight: false,
+    external: false,
   },
   {
     name: 'Professional',
-    price: '$79',
+    price: '$47',
     period: 'per user/month',
     desc: 'For growing brokerages that need full power.',
     features: [
       'Unlimited clients',
-      'Full CRM, pipeline & meetings',
+      'Full CRM, pipeline and meetings',
       'AI Associate (unlimited)',
       'AI meeting summaries',
       'Document intelligence',
@@ -35,28 +36,30 @@ const plans = [
       'Priority support',
       'API access',
     ],
-    cta: 'Start 14-day trial',
-    href: '/signup',
+    cta: 'Get Professional',
+    href: 'https://selar.com/47plan?currency=USD',
     highlight: true,
+    external: true,
   },
   {
     name: 'Enterprise',
-    price: 'Custom',
-    period: 'contact us',
-    desc: 'For large brokerages with custom requirements.',
+    price: '$57',
+    period: 'per user/month',
+    desc: 'For large brokerages that need scale and control.',
     features: [
       'Everything in Professional',
       'Unlimited team members',
       'Custom integrations',
       'Dedicated account manager',
       'SLA guarantee',
-      'Custom contract & billing',
+      'Custom contract and billing',
       'On-premise option',
-      'SSO & advanced security',
+      'SSO and advanced security',
     ],
-    cta: 'Contact sales',
-    href: 'mailto:sales@brokerbrief.com',
+    cta: 'Get Enterprise',
+    href: 'https://selar.com/57plan?currency=USD',
     highlight: false,
+    external: true,
   },
 ];
 
@@ -70,7 +73,7 @@ export default function PricingPage() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {plans.map(({ name, price, period, desc, features, cta, href, highlight }) => (
+          {plans.map(({ name, price, period, desc, features, cta, href, highlight, external }) => (
             <div
               key={name}
               className={`rounded-2xl p-7 relative ${
@@ -87,13 +90,15 @@ export default function PricingPage() {
               <h2 className={`text-xl font-bold mb-1 ${highlight ? 'text-white' : 'text-charcoal'}`}>{name}</h2>
               <div className="flex items-baseline gap-1.5 mb-1">
                 <span className={`text-4xl font-bold ${highlight ? 'text-white' : 'text-charcoal'}`}>{price}</span>
-                {price !== 'Custom' && (
+                {price !== 'Free' && (
                   <span className={`text-sm ${highlight ? 'text-white/60' : 'text-gray-400'}`}>{period}</span>
                 )}
               </div>
               <p className={`text-sm mb-6 ${highlight ? 'text-white/60' : 'text-gray-500'}`}>{desc}</p>
-              <Link
+              <a
                 href={href}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
                 className={`block w-full text-center py-2.5 rounded-lg font-semibold text-sm transition-colors mb-7 ${
                   highlight
                     ? 'bg-emerald-brand hover:bg-[#068a58] text-white'
@@ -101,7 +106,7 @@ export default function PricingPage() {
                 }`}
               >
                 {cta}
-              </Link>
+              </a>
               <ul className="space-y-2.5">
                 {features.map((f) => (
                   <li key={f} className={`flex items-start gap-2.5 text-sm ${highlight ? 'text-white/80' : 'text-gray-600'}`}>
